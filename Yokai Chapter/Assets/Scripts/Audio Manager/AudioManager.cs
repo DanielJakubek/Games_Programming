@@ -42,8 +42,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    //Plays once at the start
+    private void Start(){
+        PlaySound("MenuMusic", sounds);
+    }
+
     /* Finds the sound we want in the sounds array and then plays it. */
     public void PlaySound(string soundName, Sounds[] soundArray){
+
         Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
         
         //Checks if the sounds exsits, if so then play the sound otherwise have a console message

@@ -8,6 +8,8 @@ public class EventManager : MonoBehaviour
     //Actions
     public event Action onPlayerDamage; //Action played when player takes damage
 
+
+
     // Start is called before the first frame update
     void Awake(){
 
@@ -31,5 +33,6 @@ public class EventManager : MonoBehaviour
         if(onPlayerDamage != null)
             onPlayerDamage();
     }
+    
 
 }

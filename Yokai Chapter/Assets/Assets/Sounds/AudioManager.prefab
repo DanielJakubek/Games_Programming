@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7428449509601070666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7428449509601070667}
+  - component: {fileID: 7428449509601069492}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7428449509601070667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428449509601070666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 37.403683, y: -131.35022, z: -695.3594}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7428449509601069492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428449509601070666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509165e93c58a1c4aaf39a8df6dcc1de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds: []
+  footSteps:
+  - name: SingleStep0
+    soundClip: {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
+    volume: 0.25
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SingleStep1
+    soundClip: {fileID: 8300000, guid: 203ac8b6f07070e4f93f1c1a6fff06c3, type: 3}
+    volume: 0.25
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SingleStep2
+    soundClip: {fileID: 8300000, guid: ac6649006dbee9e4685752e124111da7, type: 3}
+    volume: 0.25
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SingleStep3
+    soundClip: {fileID: 8300000, guid: f42914d98b070f741b2feee96a2988ee, type: 3}
+    volume: 0.25
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SingleStep4
+    soundClip: {fileID: 8300000, guid: feb62160ad1f8334ab037017b843d162, type: 3}
+    volume: 0.25
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: land
+    soundClip: {fileID: 8300000, guid: 7131d701ae015a54aa3d856feccd513f, type: 3}
+    volume: 0.107
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
