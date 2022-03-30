@@ -7,8 +7,10 @@ public class EventManager : MonoBehaviour
 
 
     //============ACTIONS============//
-    public event Action closeCurrentMenu; //Event when item is clicked on the UI
-    public event Action openNextMenu; //Event to open the next menu
+    public event Action<GameObject> closeCurrentMenu; //Event when item is clicked on the UI
+    public event Action<GameObject> openNextMenu; //Event to open the next menu
+
+    public event Action closeGame; //Event to open the next menu
 
 
     // Start is called before the first frame update
@@ -26,17 +28,21 @@ public class EventManager : MonoBehaviour
     }
 
 
-
-
     //Invokes the action if it is not null
-    public void CloseMenuPanel(){
+    public void CloseMenuPanel(GameObject currentMenu){
         if(closeCurrentMenu != null)
-            closeCurrentMenu();
+            closeCurrentMenu(currentMenu);
     }
 
     //Invokes the action if it is not null
-    public void OpenMenuPanel(){
+    public void OpenMenuPanel(GameObject nextMenu){
         if(openNextMenu != null)
-            openNextMenu();
+            openNextMenu(nextMenu);
+    }
+    
+    //Invokes the action if it is not null
+    public void CloseGame(){
+        if(closeGame != null)
+            closeGame();
     }
 }
