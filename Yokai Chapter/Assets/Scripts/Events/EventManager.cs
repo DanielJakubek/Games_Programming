@@ -5,20 +5,21 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager eventMngr; 
 
-    //Actions
-    public event Action onPlayerDamage; //Action played when player takes damage
 
+    //============ACTIONS============//
+    public event Action closeCurrentMenu; //Event when item is clicked on the UI
+    public event Action openNextMenu; //Event to open the next menu
 
 
     // Start is called before the first frame update
-    void Awake(){
-
+    private void Awake(){
+        
         //Makes sure there is a single audio manager
         if(eventMngr == null){
             eventMngr = this;
         }else{
             Destroy(gameObject);
-            return;
+            return; 
         }
 
         DontDestroyOnLoad(gameObject); 
@@ -27,12 +28,13 @@ public class EventManager : MonoBehaviour
 
 
 
-
-    //Makes sure that the action is not null
-    public void PlayerTakeDamage(){
-        if(onPlayerDamage != null)
-            onPlayerDamage();
+    //Invokes the action if it is not null
+    public void CloseMenuPanel(){
+        closeCurrentMenu?.Invoke();
     }
-    
 
+    //Invokes the action if it is not null
+    public void OpenMenuPanel(){
+        openNextMenu?.Invoke();
+    }
 }
