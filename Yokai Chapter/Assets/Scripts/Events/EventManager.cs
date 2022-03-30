@@ -30,11 +30,13 @@ public class EventManager : MonoBehaviour
 
     //Invokes the action if it is not null
     public void CloseMenuPanel(){
-        closeCurrentMenu?.Invoke();
+        if(closeCurrentMenu != null)
+            closeCurrentMenu();
     }
 
     //Invokes the action if it is not null
     public void OpenMenuPanel(){
-        openNextMenu?.Invoke();
+        if(openNextMenu != null)
+            openNextMenu();
     }
 }
