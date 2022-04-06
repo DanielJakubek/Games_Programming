@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/* 
+    Scriptable object that holds the basic information
+    on the weapon, this makes it easier to make more weapons.
+*/
 [CreateAssetMenu(fileName = "New Weapon")]
 public class WeaponTemplate : ScriptableObject
 {   

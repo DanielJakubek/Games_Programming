@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Umi
   health: 100
-  range: 1.5
+  range: 1.25
   bps: 5
   damage: 10
   speed: 8

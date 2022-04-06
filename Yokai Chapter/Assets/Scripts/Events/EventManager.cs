@@ -15,6 +15,11 @@ public class EventManager : MonoBehaviour
     //============RESOURCE-ACTIONS============//
     public event Action<int> pickUpHealth; //Event when the player picks up health
 
+    //============RESOURCE-ACTIONS============//
+    public event Action<float> updatePlayerHealth; //Event to update player health on HUD
+    public event Action<float> updatePlayerArmour; //Event to update player health on HUD
+
+
     // Start is called before the first frame update
     private void Awake(){
         
@@ -49,5 +54,15 @@ public class EventManager : MonoBehaviour
     public void OnHealthPickUp(int healthInstance){
         if(pickUpHealth != null)
             pickUpHealth(healthInstance);
+    }
+
+    public void OnHealthUpdate(float playerHealth){
+        if(updatePlayerHealth != null)
+            updatePlayerHealth(playerHealth);
+    }
+
+    public void OnArmourUpdate(float playerArmour){
+        if(updatePlayerArmour != null)
+            updatePlayerArmour(playerArmour);
     }
 }
