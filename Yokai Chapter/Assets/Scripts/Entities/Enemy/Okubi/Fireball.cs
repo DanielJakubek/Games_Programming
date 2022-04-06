@@ -9,6 +9,7 @@ public class Fireball : MonoBehaviour
 
     //called once at the start
     private void Start() {
+        AudioManager.mngInstance.PlaySound("Fireball", AudioManager.mngInstance.sounds);
         transform.LookAt(Player.playerInstance.transform.position);
     }
 

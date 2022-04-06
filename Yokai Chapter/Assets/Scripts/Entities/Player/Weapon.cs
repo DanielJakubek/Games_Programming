@@ -39,7 +39,6 @@ public class Weapon : MonoBehaviour
 
             //Assigns the time to see if the player can shoot again
             waitTime = Time.time + 1f/weaponTemplate.bps;
-
             ShootGun();
         }
     }
@@ -63,7 +62,7 @@ public class Weapon : MonoBehaviour
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitTarget, weaponTemplate.range)){
 
             //Creates an object of the Enemy class
-            Enemy enemy = hitTarget.transform.GetComponent<Enemy>();
+            NewEnemy enemy = hitTarget.transform.GetComponent<NewEnemy>();
             
             //If the player shot an enemy, make the enemy take damage
              if(enemy !=null)

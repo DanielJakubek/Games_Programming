@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 /*
     Shows an error with UI not existing in the namespace, however, it seems
@@ -9,16 +8,14 @@ using System.Collections.Generic;
 */
 public class MainMenu : MonoBehaviour
 {
-    //The Buttons
-  
-    //
-    
 
-    
-    
     [Header("Start")]
     public GameObject startMenu;
     public Button startBackBtn;
+    public Button levelOne;
+    public Button levelTwo;
+    public Button levelThree;
+
 
     [Header("Main Menu")]
     public GameObject mainMenu;
@@ -41,6 +38,7 @@ public class MainMenu : MonoBehaviour
 
         //=====Add listeners for buttons=====//
 
+        //============================================================================================
         //Main Menu - Start
         Button startButton = startBtn.GetComponent<Button>();
         startButton.onClick.AddListener(() => { SwitchMenus(mainMenu, startMenu);});
@@ -53,25 +51,34 @@ public class MainMenu : MonoBehaviour
         Button exitButton = exitBtn.GetComponent<Button>();
         exitButton.onClick.AddListener(() => { EventManager.eventMngr.CloseGame();});
 
+        //============================================================================================
 
         //Start Menu 
+        Button loadLevelOneBtn = levelOne.GetComponent<Button>();
+        loadLevelOneBtn.onClick.AddListener(DoNothing);
+
+        Button loadLevelTwoBtn = levelTwo.GetComponent<Button>();
+        loadLevelTwoBtn.onClick.AddListener(DoNothing);
+
+        Button loadLevelThreeBtn = levelThree.GetComponent<Button>();
+        loadLevelThreeBtn.onClick.AddListener(DoNothing);
+
+        //Back Button
         Button startBackButton = startBackBtn.GetComponent<Button>();
         startBackButton.onClick.AddListener(() => { SwitchMenus(startMenu, mainMenu);});
 
-
+        //============================================================================================
 
         //Settings menu
         Button settingBackButton = settingsBackBtn.GetComponent<Button>();
         settingBackButton.onClick.AddListener(() => { SwitchMenus(settingsMenu, mainMenu);});
-       
-        
-
-
-
-        
-
-
     }
+
+    //=======================TEST =======================
+    private void DoNothing(){
+        SceneManager.LoadScene("SampleScene"); 
+    }
+
     
     /*
         Deals with switching menu scenes, this is done by calling an action to disable and enable

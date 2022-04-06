@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using UnityEngine.SceneManagement;
 
 /* 
     References Barckeys video on "Introduction to AUDIO in Unity".
@@ -44,7 +45,9 @@ public class AudioManager : MonoBehaviour
 
     //Plays once at the start
     private void Start(){
-        PlaySound("MenuMusic", sounds);
+
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+            PlaySound("MenuMusic", sounds);
     }
 
     /* Finds the sound we want in the sounds array and then plays it. */

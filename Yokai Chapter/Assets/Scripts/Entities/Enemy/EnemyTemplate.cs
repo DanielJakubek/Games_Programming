@@ -12,4 +12,7 @@ public class EnemyTemplate : ScriptableObject
     public float bps = 1f; //Attack Speed
     public float damage = 25f; //The dmg the enemy deals
     public float speed = 20f; //The speed of the enemy
+    public float agroDistance = 20f; //The distance the target needs to enter before attacking
+    public float fleeDistance = 15f; //The distance the before the enemy flees
+    public string enemyAtckType = ""; // The attack type of the enemy
 }

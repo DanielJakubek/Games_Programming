@@ -15,8 +15,8 @@ public class CharacterMovement : MonoBehaviour{
     public float bobSpeed = 15f; //How fast the bob happens
     public float bobValue = 0.1f; //How many times the bob occurs
 
-    float startingPosition = 0f; //The default camera y position
-    float metronome; //Used to keep the beat of the 
+    private float startingPosition = 0f; //The default camera y position
+    private float metronome; //Used to keep the beat of the 
 
     [Header("Sounds")]
     public float runningStepRate; //Rate at which to play foot sounds
@@ -109,7 +109,7 @@ public class CharacterMovement : MonoBehaviour{
             waitTime = Time.time + 1f/stepRate;
 
             //Generates a random number to choose a random foot step sound to play.
-            audioMng.PlaySound("Step"+Random.Range(0, 5), audioMng.sounds);
+            audioMng.PlaySound("Step"+Random.Range(0, 3), audioMng.sounds);
         }
     }
 }

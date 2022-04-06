@@ -9,7 +9,6 @@ public class Door : Interact
     //Called once at the start before the frame
     private void Start() {
         isOpen = false;
-        
         description = "Press 'E' To Open";
     }
 

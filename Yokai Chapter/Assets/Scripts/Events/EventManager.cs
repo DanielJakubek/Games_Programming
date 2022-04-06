@@ -2,21 +2,23 @@ using UnityEngine;
 using System;
 
 public class EventManager : MonoBehaviour
-{
+{   
+    //Static ref to this class
     public static EventManager eventMngr; 
 
 
-    //============ACTIONS============//
+    //============UI-ACTIONS============//
     public event Action<GameObject> closeCurrentMenu; //Event when item is clicked on the UI
     public event Action<GameObject> openNextMenu; //Event to open the next menu
-
     public event Action closeGame; //Event to open the next menu
 
+    //============RESOURCE-ACTIONS============//
+    public event Action<int> pickUpHealth; //Event when the player picks up health
 
     // Start is called before the first frame update
     private void Awake(){
         
-        //Makes sure there is a single audio manager
+        //Makes sure there is a single event manager
         if(eventMngr == null){
             eventMngr = this;
         }else{
@@ -28,21 +30,24 @@ public class EventManager : MonoBehaviour
     }
 
 
-    //Invokes the action if it is not null
+    //============ ACTION INVOKES IF NOT NUTLL //============
     public void CloseMenuPanel(GameObject currentMenu){
         if(closeCurrentMenu != null)
             closeCurrentMenu(currentMenu);
     }
 
-    //Invokes the action if it is not null
     public void OpenMenuPanel(GameObject nextMenu){
         if(openNextMenu != null)
             openNextMenu(nextMenu);
     }
-    
-    //Invokes the action if it is not null
+
     public void CloseGame(){
         if(closeGame != null)
             closeGame();
+    }
+
+    public void OnHealthPickUp(int healthInstance){
+        if(pickUpHealth != null)
+            pickUpHealth(healthInstance);
     }
 }

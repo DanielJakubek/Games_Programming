@@ -24,14 +24,12 @@ public class Player : Entity
         DontDestroyOnLoad(gameObject);
     }
 
-    //public Text healthCunt;
-
-
     /*
         Function to call when enemy us trying to damange the player
     */
     public override void UpdateHealth(float dmg){
 
+        AudioManager.mngInstance.PlaySound("GotHit", AudioManager.mngInstance.sounds);
         health = health-dmg;
 
         //"kills" the enemy when their hp reaches
@@ -40,8 +38,6 @@ public class Player : Entity
 
         //Tells the event manager to update the UI
         //EventManager.eventMngr.PlayerTakeDamage();
-
-
     }
 
     private void Update() {

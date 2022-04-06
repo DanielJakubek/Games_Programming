@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7428449509601070666
+--- !u!1 &7650496103151286880
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7428449509601070667}
-  - component: {fileID: 7428449509601069492}
+  - component: {fileID: 7650496103151286881}
+  - component: {fileID: 7650496103151287710}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -17,68 +17,79 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7428449509601070667
+--- !u!4 &7650496103151286881
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428449509601070666}
+  m_GameObject: {fileID: 7650496103151286880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.403683, y: -131.35022, z: -695.3594}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7428449509601069492
+--- !u!114 &7650496103151287710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428449509601070666}
+  m_GameObject: {fileID: 7650496103151286880}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 509165e93c58a1c4aaf39a8df6dcc1de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
-  footSteps:
-  - name: SingleStep0
+  sounds:
+  - name: Step0
     soundClip: {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
     volume: 0.25
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: SingleStep1
+  - name: Step1
     soundClip: {fileID: 8300000, guid: 203ac8b6f07070e4f93f1c1a6fff06c3, type: 3}
     volume: 0.25
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: SingleStep2
+  - name: Step2
     soundClip: {fileID: 8300000, guid: ac6649006dbee9e4685752e124111da7, type: 3}
     volume: 0.25
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: SingleStep3
+  - name: Step3
     soundClip: {fileID: 8300000, guid: f42914d98b070f741b2feee96a2988ee, type: 3}
     volume: 0.25
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: SingleStep4
+  - name: Step4
     soundClip: {fileID: 8300000, guid: feb62160ad1f8334ab037017b843d162, type: 3}
     volume: 0.25
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: land
-    soundClip: {fileID: 8300000, guid: 7131d701ae015a54aa3d856feccd513f, type: 3}
-    volume: 0.107
+  - name: Step5
+    soundClip: {fileID: 8300000, guid: 001f691d110d55648871a03f446ffa08, type: 3}
+    volume: 0.25
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Pistol
+    soundClip: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
+    volume: 0.25
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuMusic
+    soundClip: {fileID: 8300000, guid: f859cc09bee81df45904fb1fb25a2576, type: 3}
+    volume: 0.052
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
