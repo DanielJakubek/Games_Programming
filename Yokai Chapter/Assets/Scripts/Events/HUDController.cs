@@ -39,7 +39,7 @@ public class HUDController : MonoBehaviour
         the armour of the player
     */
     public void UpdateHudArmour(float playerArmour){
-        armourText.text = playerArmour.ToString() +"%";
+        armourText.text = playerArmour.ToString();
     }
 
     
@@ -58,13 +58,11 @@ public class HUDController : MonoBehaviour
         the ammo of the gun
     */
     public void UpdateWeaponHudAmmo(int gunAmmo){
-        gunAmmoText.text = gunAmmo.ToString();
-    }
-
-
-
-
-
+        if(gunAmmo >= 0)
+            gunAmmoText.text = gunAmmo.ToString();
+        else
+            gunAmmoText.text = "-";
+    }   
 
 
     //Unsubscribes the events from list upon their destruction

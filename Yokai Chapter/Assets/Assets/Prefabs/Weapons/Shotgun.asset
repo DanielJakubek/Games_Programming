@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 75
   range: 60
-  bps: 0.75
-  ammo: 12
+  bps: 1.25
+  ammo: 878
