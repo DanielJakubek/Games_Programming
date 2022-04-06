@@ -57,7 +57,7 @@ public class Player : Entity
     /*
         This function is called every time the player is hit by an enemy
         and therefore is forced to take damage. Upon damage, their health
-        is updated, a sound is played and the hud is updated.
+        is updated and a sound is played.
 
         Parameter: float dmg, the number being subtracted from the player
     */
@@ -78,8 +78,6 @@ public class Player : Entity
         //Play sound upon taking damage
         AudioManager.mngInstance.PlaySound("GotHit", AudioManager.mngInstance.sounds);
     }
-
-  
 
 
     /*

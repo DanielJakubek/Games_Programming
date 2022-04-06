@@ -12,7 +12,6 @@ public class ResourceController : MonoBehaviour
         EventManager.eventMngr.pickUpHealth += HealthPickUp;
     }
 
-
     /*
         Increases the player's max hp to 100%. This is done by checking if the player is 
         under 100%, and if so then sets the hp to 100 and deletes this gameobject
@@ -24,6 +23,9 @@ public class ResourceController : MonoBehaviour
 
         //If correct health drop has been collected
         if(this.healthInstance == healthInstance && Player.playerInstance.health < 100f){
+
+            AudioManager.mngInstance.PlaySound("PickUp", AudioManager.mngInstance.sounds); //Pick up sound
+
             Player.playerInstance.health = 100f;
             Destroy(gameObject);
         }  

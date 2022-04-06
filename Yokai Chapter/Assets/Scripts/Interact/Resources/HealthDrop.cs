@@ -8,9 +8,7 @@ public class HealthDrop : Resource
 
     //Activate action to increase hp if bababooey
     private void OnTriggerEnter(Collider other) {
-
         if(other.tag == "Player")
             EventManager.eventMngr.OnHealthPickUp(healthInstance);
-        
     }
 }

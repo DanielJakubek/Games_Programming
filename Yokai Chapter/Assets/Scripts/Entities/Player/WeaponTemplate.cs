@@ -11,4 +11,5 @@ public class WeaponTemplate : ScriptableObject
     public float dmg = 50f; //Damage the weapon does to the enemy
     public float range = 60f; //The distance of the weapon
     public float bps = 1f; //Bullets per second
+    public int ammo = 25; //The starting number of bullets
 }

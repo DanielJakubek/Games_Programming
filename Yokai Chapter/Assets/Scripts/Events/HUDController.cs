@@ -10,11 +10,18 @@ public class HUDController : MonoBehaviour
 {      
     public TextMeshProUGUI healthText; // The text component for the health
     public TextMeshProUGUI armourText; // The text component for the armour
+
+    public TextMeshProUGUI gunAmmoText; // The text component for the health
+    public TextMeshProUGUI weaponNameText; // The text component for the armour
     
     // Start is called before the first frame update
     private void Start(){
         EventManager.eventMngr.updatePlayerHealth += UpdateHudHealth;
-        EventManager.eventMngr.updatePlayerArmour +=UpdateHudArmour;
+        EventManager.eventMngr.updatePlayerArmour += UpdateHudArmour;
+
+
+        EventManager.eventMngr.updateWeaponName += UpdateWeaponHudName;
+        EventManager.eventMngr.updateGunAmmo += UpdateWeaponHudAmmo;
     }
 
     /*
@@ -35,10 +42,36 @@ public class HUDController : MonoBehaviour
         armourText.text = playerArmour.ToString() +"%";
     }
 
+    
+    /*
+        Updates the weapon name on the HUD.
+        Takes in the paramter weaponName which is
+        the name of the weapon.
+    */
+    public void UpdateWeaponHudName(string weaponName){
+        weaponNameText.text = weaponName.ToString();
+    }
+
+    /*
+        Updates the weapon ammo on the HUD.
+        Takes in the paramter gunAmmo which is
+        the ammo of the gun
+    */
+    public void UpdateWeaponHudAmmo(int gunAmmo){
+        gunAmmoText.text = gunAmmo.ToString();
+    }
+
+
+
+
+
+
 
     //Unsubscribes the events from list upon their destruction
     private void OnDestroy() {
         EventManager.eventMngr.updatePlayerHealth -= UpdateHudHealth;
         EventManager.eventMngr.updatePlayerArmour -=UpdateHudArmour;
+        EventManager.eventMngr.updateWeaponName -= UpdateWeaponHudName;
+        EventManager.eventMngr.updateGunAmmo -= UpdateWeaponHudAmmo;
     }
 }

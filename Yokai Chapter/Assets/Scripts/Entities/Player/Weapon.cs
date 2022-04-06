@@ -21,6 +21,12 @@ public class Weapon : MonoBehaviour
     //The player's camera
     public Camera playerCamera; 
 
+    private void Start() {
+        EventManager.eventMngr.OnAmmoUse(weaponTemplate.ammo);
+
+        //THIS SOULD BE DONE ON ENABLE
+        EventManager.eventMngr.OnWeaponSwitch(weaponTemplate.name);
+    }
 
     //Update is called once per frame
     private void Update(){
@@ -36,11 +42,28 @@ public class Weapon : MonoBehaviour
 
         //Gets the user input
         if(Input.GetButtonDown("Fire1") && Time.time > waitTime){
-
+            
             //Assigns the time to see if the player can shoot again
             waitTime = Time.time + 1f/weaponTemplate.bps;
-            ShootGun();
+            HandleGun();
         }
+    }
+
+    /*
+        Handles the gun operation, this specifically deals with
+        the ammo, if there is no then shoot, otherwise, play a sound
+        to indicate no more bullets.
+    */
+    private void HandleGun(){
+
+        //If there is ammo, shoot and subtract one ammo
+        if(weaponTemplate.ammo > 0){
+            weaponTemplate.ammo --;
+            ShootGun();
+        }else
+            audioMng.PlaySound("NoAmmo", audioMng.sounds);
+
+        EventManager.eventMngr.OnAmmoUse(weaponTemplate.ammo);
     }
 
     /*  

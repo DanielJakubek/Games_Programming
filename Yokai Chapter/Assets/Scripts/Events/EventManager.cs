@@ -19,6 +19,9 @@ public class EventManager : MonoBehaviour
     public event Action<float> updatePlayerHealth; //Event to update player health on HUD
     public event Action<float> updatePlayerArmour; //Event to update player health on HUD
 
+    //============WEAPON-ACTIONS============//
+    public event Action<int> updateGunAmmo; //Event to update player health on HUD
+    public event Action<string> updateWeaponName; //Event to update player health on HUD
 
     // Start is called before the first frame update
     private void Awake(){
@@ -61,8 +64,20 @@ public class EventManager : MonoBehaviour
             updatePlayerHealth(playerHealth);
     }
 
-    public void OnArmourUpdate(float playerArmour){
+    public void OnArmourUpdate(float playerArmour){ 
         if(updatePlayerArmour != null)
             updatePlayerArmour(playerArmour);
     }
+
+    public void OnAmmoUse(int ammo){
+        if(updateGunAmmo != null)
+            updateGunAmmo(ammo);
+    }
+
+    public void OnWeaponSwitch(string weaponName){
+        if(updateWeaponName != null)
+            updateWeaponName(weaponName);
+    }
+
+    
 }
