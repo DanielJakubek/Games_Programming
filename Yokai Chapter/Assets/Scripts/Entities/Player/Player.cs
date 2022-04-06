@@ -25,15 +25,33 @@ public class Player : Entity
         DontDestroyOnLoad(gameObject);
     }
 
+
+    float oldHealth;
+    float oldArmour;
+
     //Start is called before the first frame update
     private void Start() {
+
+        oldHealth = health;
+        oldArmour = armour;
+
         EventManager.eventMngr.OnHealthUpdate(health);
         EventManager.eventMngr.OnArmourUpdate(armour);
     }
 
     //Called once every frame
     private void Update() {
+
         PlayerInteract();
+
+        //The health or armour changed value
+        if(health != oldHealth || armour != oldArmour){
+            EventManager.eventMngr.OnHealthUpdate(playerInstance.health);
+            EventManager.eventMngr.OnArmourUpdate(playerInstance.armour);
+
+            oldHealth = health;
+            oldArmour = armour;
+        }
     }
 
     /*
@@ -46,24 +64,22 @@ public class Player : Entity
     public override void UpdateHealth(float dmg){
         
         //Take away from armour
-        if(armour >= 0f)
-            armour -= dmg;
+        if(playerInstance.armour >= 0f)
+            playerInstance.armour -= dmg;
         
         //Multiplies the armour value by -1 to make it positive and subtracts it from health
-        if(armour < 0){
-            armour *= -1f; 
-            health = health-armour;
+        if(playerInstance.armour < 0){
+            playerInstance.armour *= -1f; 
+            playerInstance.health -= armour;
 
-            armour = 0; //Make armour zero because it should be now.
+            playerInstance.armour = 0; //Make armour zero because it should be now.
         }
 
         //Play sound upon taking damage
         AudioManager.mngInstance.PlaySound("GotHit", AudioManager.mngInstance.sounds);
-
-        //Action to update health and armour on HUD
-        EventManager.eventMngr.OnHealthUpdate(health);
-        EventManager.eventMngr.OnArmourUpdate(armour);
     }
+
+  
 
 
     /*

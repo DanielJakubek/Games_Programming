@@ -7,7 +7,7 @@ using TMPro;
     such as player Health, ammo and armour.
 */
 public class HUDController : MonoBehaviour
-{   
+{      
     public TextMeshProUGUI healthText; // The text component for the health
     public TextMeshProUGUI armourText; // The text component for the armour
     
