@@ -1,7 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    Parent class to other resources
+    Holds the common properties of other items and
+    makes the entity spin and go up and down.
+*/
 public class Resource : MonoBehaviour
 {   
     [Header("Resource properties")]
@@ -13,7 +16,7 @@ public class Resource : MonoBehaviour
     private float metronome; //Used to keep the beat of the 
 
     // Update is called once per frame
-    void FixedUpdate(){
+    private void FixedUpdate(){
 
         //Rotates the object on the y axis
         transform.Rotate(Vector3.up * Time.deltaTime*smoothSpeed); 
@@ -27,5 +30,15 @@ public class Resource : MonoBehaviour
 
         //Moves the object up and down.
         transform.localPosition = temp;
+    }
+
+    /*
+        Plays a sound when this object is picked up and then checks what
+        value to update, currently updates the health or armour
+    */
+    public void UpdateResource(){
+
+        AudioManager.mngInstance.PlaySound("PickUp", AudioManager.mngInstance.sounds); //Pick up sound
+        Destroy(gameObject);
     }
 }

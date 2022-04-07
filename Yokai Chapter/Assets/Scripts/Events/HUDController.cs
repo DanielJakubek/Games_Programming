@@ -19,7 +19,6 @@ public class HUDController : MonoBehaviour
         EventManager.eventMngr.updatePlayerHealth += UpdateHudHealth;
         EventManager.eventMngr.updatePlayerArmour += UpdateHudArmour;
 
-
         EventManager.eventMngr.updateWeaponName += UpdateWeaponHudName;
         EventManager.eventMngr.updateGunAmmo += UpdateWeaponHudAmmo;
     }

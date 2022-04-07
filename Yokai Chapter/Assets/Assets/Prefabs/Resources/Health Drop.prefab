@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1842118331797882, guid: 3241d465fe47a1a488518705a32c39ef, type: 3}
       propertyPath: m_Name
-      value: Health
+      value: Health Drop
       objectReference: {fileID: 0}
     - target: {fileID: 4189017311554562, guid: 3241d465fe47a1a488518705a32c39ef, type: 3}
       propertyPath: m_RootOrder
@@ -89,18 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothSpeed: 100
-  healthInstance: 1
---- !u!114 &150681703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8776837938749490521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a7c61a294ab1040b95f3adacd28382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthValue: 50
-  healthInstance: 1
+  resourceInstance: 0

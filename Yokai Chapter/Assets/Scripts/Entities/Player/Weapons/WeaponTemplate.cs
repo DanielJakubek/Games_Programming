@@ -12,4 +12,5 @@ public class WeaponTemplate : ScriptableObject
     public float range = 60f; //The distance of the weapon
     public float bps = 1f; //Bullets per second
     public int ammo = 25; //The starting number of bullets
+    public int ammoDropCount = 25; //The amount of bullets this weapons drop will contain
 }

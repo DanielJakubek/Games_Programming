@@ -56,12 +56,6 @@ public class HitScanWeapon : Weapon
              }
              else
                 ImpactParticleInstantiate(false);
-             
-                 
-
-            // //The impact particle when a gun is fired, it is destroyed after 1 second
-            // GameObject temp = Instantiate(impactParticle, hitTarget.point, Quaternion.LookRotation(hitTarget.normal));
-            // Destroy(temp,1);
         }
     }
 

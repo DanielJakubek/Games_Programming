@@ -14,8 +14,11 @@ public class EventManager : MonoBehaviour
 
     //============RESOURCE-ACTIONS============//
     public event Action<int> pickUpHealth; //Event when the player picks up health
+    public event Action<int> pickUpArmour; //Event when the player picks up armour
 
-    //============RESOURCE-ACTIONS============//
+    public event Action<AmmoProperties> pickUpAmmo; //Event when the player picks up ammo
+
+    //============HUD-ACTIONS============//
     public event Action<float> updatePlayerHealth; //Event to update player health on HUD
     public event Action<float> updatePlayerArmour; //Event to update player health on HUD
 
@@ -39,6 +42,8 @@ public class EventManager : MonoBehaviour
 
 
     //============ ACTION INVOKES IF NOT NUTLL //============
+
+    //Menu
     public void CloseMenuPanel(GameObject currentMenu){
         if(closeCurrentMenu != null)
             closeCurrentMenu(currentMenu);
@@ -54,11 +59,23 @@ public class EventManager : MonoBehaviour
             closeGame();
     }
 
+    //Resource pick ups
     public void OnHealthPickUp(int healthInstance){
         if(pickUpHealth != null)
             pickUpHealth(healthInstance);
     }
 
+    public void OnArmourPickUp(int armourInstance){
+        if(pickUpArmour != null)
+            pickUpArmour(armourInstance);
+    }
+
+    public void OnAmmoPickUp(AmmoProperties ammoProperties){
+        if(pickUpAmmo != null)
+            pickUpAmmo(ammoProperties);
+    }
+ 
+    //HUD changes
     public void OnHealthUpdate(float playerHealth){
         if(updatePlayerHealth != null)
             updatePlayerHealth(playerHealth);
@@ -77,7 +94,19 @@ public class EventManager : MonoBehaviour
     public void OnWeaponSwitch(string weaponName){
         if(updateWeaponName != null)
             updateWeaponName(weaponName);
-    }
+    }   
+}
 
+
+public class AmmoProperties{
+
+    public int instance;
+    public int ammoCount;
+    public WeaponTemplate weaponTemplate;
     
+    public AmmoProperties(int instance, int ammoCount, WeaponTemplate weaponTemplate){
+        this.instance = instance;
+        this.ammoCount = ammoCount;
+        this.weaponTemplate = weaponTemplate;
+    }
 }
