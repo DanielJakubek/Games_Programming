@@ -7,6 +7,7 @@ public class NewEnemy : Entity
     [Header("Enemy stats")]
     public EnemyTemplate enemyTemplate; //The template specific to enemies
     public Transform target;
+    private GameObject thePlayer;
 
     //Called once before the start  
     private void Awake() {
@@ -16,6 +17,9 @@ public class NewEnemy : Entity
     //Called once at the start 
     private void Start() {
         AudioManager.mngInstance.PlaySound("OkubiAmbient", AudioManager.mngInstance.sounds);
+        thePlayer = Player.playerInstance.gameObject;
+
+        target = thePlayer.transform;
     }
 
     //Called every frame before Update

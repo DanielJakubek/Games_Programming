@@ -28,6 +28,8 @@ public class EnemyContex : MonoBehaviour
 
     //Called once before the start method
     private void Awake() {
+        
+        target = Player.playerInstance.gameObject;
 
         idleState = new EnemyIdleState(enemyTemplate, target, gameObject, enemyAnimator, agent);
         walkingState = new EnemyWalkingState(enemyTemplate, target, gameObject, enemyAnimator, agent);
