@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,7 +27,7 @@ public class EnemyContex : MonoBehaviour
     //Called once before the start method
     private void Awake() {
         
-        target = Player.playerInstance.gameObject;
+        target = Player.playerInstance.gameObject; //Gets player game object to follow
 
         idleState = new EnemyIdleState(enemyTemplate, target, gameObject, enemyAnimator, agent);
         walkingState = new EnemyWalkingState(enemyTemplate, target, gameObject, enemyAnimator, agent);
@@ -47,8 +45,6 @@ public class EnemyContex : MonoBehaviour
             break;
 
         }
-
-
 
         fleeState = new EnemyFleeState();
     }

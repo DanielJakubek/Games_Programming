@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    The prototype game pattern. This keeps a list of
+    all the enemies and is responsible for the spawner
+    being able to pick an enemy gameobject at will.
+*/
 public class Prototype : MonoBehaviour
 {   
-    //Instance of this object
-    public static Prototype prototypeInstance; 
-
+    public static Prototype prototypeInstance; //Instance of this object
     public GameObject[] enemies; //List of enemies in the game
 
     // Start is called before the first frame update

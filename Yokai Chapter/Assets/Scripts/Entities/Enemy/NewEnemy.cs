@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/*  
+    The purpose of this class is to play various enemy sounds but most
+    importantly to keep track of enemy properties such as their health
+*/
 public class NewEnemy : Entity
 {   
     [Header("Enemy stats")]
@@ -16,9 +18,10 @@ public class NewEnemy : Entity
 
     //Called once at the start 
     private void Start() {
-        AudioManager.mngInstance.PlaySound("OkubiAmbient", AudioManager.mngInstance.sounds);
-        thePlayer = Player.playerInstance.gameObject;
+        //AudioManager.mngInstance.PlaySound("OkubiAmbient", AudioManager.mngInstance.sounds);
 
+        //Player game object to follow/target
+        thePlayer = Player.playerInstance.gameObject;
         target = thePlayer.transform;
     }
 
