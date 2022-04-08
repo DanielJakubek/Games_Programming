@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -19,6 +21,11 @@ public class EventManager : MonoBehaviour
     //============WEAPON-ACTIONS============//
     public event Action<int> updateGunAmmo; //Event to update player health on HUD
     public event Action<string> updateWeaponName; //Event to update player health on HUD
+
+    //============ENEMY-ACTIONS============//
+  
+    
+
 
     // Start is called before the first frame update
     private void Awake(){
@@ -72,5 +79,14 @@ public class EventManager : MonoBehaviour
     public void OnWeaponSwitch(string weaponName){
         if(updateWeaponName != null)
             updateWeaponName(weaponName);
-    }   
+    }  
+
+
+    public event Action<string, int> startWave; //Event to spawn enemies
+    public void StartWave(string area, int wave){
+        if(startWave != null)
+            startWave(area, wave); 
+    }
+
+
 }

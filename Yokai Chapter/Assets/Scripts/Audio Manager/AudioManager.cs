@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds; //Ref to Sounds class (main sounds)
-
     public static AudioManager mngInstance; 
 
     // Start is called before the first frame update

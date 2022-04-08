@@ -23,10 +23,13 @@ public class Entity : MonoBehaviour
         if(health <= 0){
             
             KillParticle();
+
+            int temp = EnemyCounter.enmyCounterInstace.getAmountOfEnemies() -1;
+            EnemyCounter.enmyCounterInstace.setAmountOfEnemies(temp);
+
             Destroy(gameObject);
             
-            
-            
+
         }
             
     }

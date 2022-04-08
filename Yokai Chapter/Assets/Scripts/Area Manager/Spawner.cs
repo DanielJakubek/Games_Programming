@@ -1,15 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /*
-    The purpose of this class is to
-    spawn enemies in a random location within
-    a set grid upon request
+    This class deals with spawning enemies upon request,
+    It will have an area that can be set to whatever size, and 
+    enemies can only spawn in that area.
 */
-public class Cloner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
+    public List<WaveTemplate> enemyWaves = new List<WaveTemplate>(); //List of information for each wave
+    public string areaName; //Name of the current area
     public Vector2 spawnSize; //Size of the spawn area
     public LayerMask spawnable; //What surface the enemies can spawn on
 
+    private void Start() {
+        EventManager.eventMngr.startWave += SpawnWave; //Subs function to event
+    }
+
+    /*
+        Used to spawn the correct enemy in the current scenario.
+        This is done by making sure that the correct area was chosen and
+        then checking if there are scriptable objects for the waves, if so
+        will loop to spawn enemies for that wave
+    */
+    private void SpawnWave(string areaName, int wave){
+        if(this.areaName == areaName){
+            if(enemyWaves.Count > wave){
+                foreach(var enemies in enemyWaves[wave].enemyList){
+                    SpawnEnemy(enemies.enemyName, enemies.amountOfEnemies);
+                }
+            }
+        }
+    }
 
     /*
         Used in order to spawn the requested enemy. Does this by first checking if
@@ -20,7 +42,7 @@ public class Cloner : MonoBehaviour
         enemyName, a string that holds the information as to what enemy to spawn.
         numberOfEnemies, an int which tells it how many enemies to spawn
     */
-    private void SpawnEnemy(string enemyName, int numberOfEnemies){
+    public void SpawnEnemy(string enemyName, int numberOfEnemies){
 
         //Requests the enemy from the prototype
         GameObject enemyToSpawn = Prototype.prototypeInstance.GetEnemy(enemyName);
@@ -35,12 +57,17 @@ public class Cloner : MonoBehaviour
                 
                 Vector3 spawnPosition = FindSpawnLocation();
 
-                if(spawnPosition != Vector3.zero)
+                if(spawnPosition != Vector3.zero){
                     Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+
+                    int temp = EnemyCounter.enmyCounterInstace.getAmountOfEnemies() +1;
+                    EnemyCounter.enmyCounterInstace.setAmountOfEnemies(temp);
+                }
             }
+
+              Debug.Log(EnemyCounter.enmyCounterInstace.getAmountOfEnemies());
         }
     }
-
 
     /*
         Finds a random location in the grid to spawn the enemy. This is done by
@@ -82,10 +109,13 @@ public class Cloner : MonoBehaviour
     }
 
   
-    //TEMP FOR TESTING, DRAWS GRID AROUND SPAWNER
+    //Used to see how large the spawn area is
     private void OnDrawGizmos() {
-
         Gizmos.DrawWireCube(transform.position, new Vector3(spawnSize.x, 1, spawnSize.y));
-        
+    }
+
+    //Unsubs the event when destroyed
+    private void OnDestroy() {
+         EventManager.eventMngr.startWave -= SpawnWave;
     }
 }
