@@ -10,20 +10,23 @@ public class EnemyContex : MonoBehaviour
 {
     [Header("All the possible states")]
     public EnemyState currentState;
+
     public EnemyIdleState idleState;
     public EnemyWalkingState walkingState;
+    public EnemyFleeState fleeState;
+
     public MeleeState meleeState;
     public HitScanState hitScanState;
+    public ExplodeState explodeState;
     public ProjectileState projectileState;
-    public EnemyFleeState fleeState;
+
 
     [Header("Enemy properties")]
     public EnemyTemplate enemyTemplate; //Scriptable object containing enemy details
     public GameObject target; //The target's gameobject
     public Animator enemyAnimator; //The animator used to animate the enemy
-    public NavMeshAgent agent; //The pathfinding 
-    
-
+    public NavMeshAgent agent; //The pathfinding
+        
     //Called once before the start method
     private void Awake() {
         
@@ -43,6 +46,9 @@ public class EnemyContex : MonoBehaviour
             case "Projectile":
                 projectileState = new ProjectileState(enemyTemplate, target, gameObject, enemyAnimator, agent);
             break;
+            case "Explode":
+                explodeState = new ExplodeState(enemyTemplate, target, gameObject, enemyAnimator, agent);
+            break;
 
         }
 
@@ -55,11 +61,17 @@ public class EnemyContex : MonoBehaviour
         currentState.StartState(this);
     }
 
+
+    //Called once every frame before update
+    private void FixedUpdate() {
+        currentState.FixedUpdateState(this);
+    }
+
     // Update is called once per frame
     private void Update(){
         currentState.UpdateState(this);
     }
-    
+
     //Used to switch between states
     public void SwitchStates(EnemyState state){
         currentState = state;

@@ -4,6 +4,7 @@ public class Fireball : MonoBehaviour
 {   
     private RaycastHit hitTarget;
     private bool hasCollided = false;
+    public float speed = 40f;
 
     public float dmg;
 
@@ -16,7 +17,7 @@ public class Fireball : MonoBehaviour
     // Update is called once per frame
     private void Update(){
         //Moves the fireball forward
-        transform.position += transform.forward*10f*Time.deltaTime;
+        transform.position += transform.forward* speed *Time.deltaTime;
     }
 
     //Setter for the damage

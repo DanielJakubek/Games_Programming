@@ -16,7 +16,8 @@ public class MeleeState : EnemyAttackingState
 
     //Used to carry out the state upon entry
     public override void StartState(EnemyContex context){   
-        enemyAnimator.SetInteger("Tranisiton", 2); //Plays attacking animation
+        if(enemyAnimator != null)
+            enemyAnimator.SetInteger("Transition", 2); //Plays attacking animation
     }
 
     // Update is called once per frame

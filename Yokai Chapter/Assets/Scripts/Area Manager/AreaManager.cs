@@ -12,6 +12,8 @@ public class AreaManager : MonoBehaviour
     public int numberOfWaves,currentWave;
     public string areaName; //What area the spawner is responsilbe for
 
+    public int spawnNextAfter = 0;
+
     //The trigger area
     private bool triggered,triggerOnce = false;
    
@@ -20,7 +22,7 @@ public class AreaManager : MonoBehaviour
     {   
         //If the player has entered the trigger area and there are more waves to go
         if(triggered){
-            if(EnemyCounter.enmyCounterInstace.getAmountOfEnemies() <= 0){
+            if(EnemyCounter.enmyCounterInstace.getAmountOfEnemies() <= spawnNextAfter){
                 
                 //Activate the action to start the wave, parsing the name of this area and what wave
                 EventManager.eventMngr.StartWave(areaName, currentWave);

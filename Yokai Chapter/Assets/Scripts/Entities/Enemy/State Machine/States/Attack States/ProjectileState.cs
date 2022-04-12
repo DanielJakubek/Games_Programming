@@ -43,8 +43,10 @@ public class ProjectileState : EnemyAttackingState
         Vector3 temp = new Vector3(itSelf.transform.position.x, target.transform.position.y, itSelf.transform.position.z);
 
         //Shoots a ray from the enemy is hit will be stored in the out variable,
-        if(Physics.Raycast(temp, itSelf.transform.forward, out hitTarget, enemyTemplate.range))
-            AttackTarget();
+        if(Physics.Raycast(temp, itSelf.transform.forward, out hitTarget, enemyTemplate.range)){
+            //if(hitTarget.transform.tag == "Player")   
+                AttackTarget();
+        } 
     }
 
     /* Shoots at the target whenever they are in sights at a fire rate*/

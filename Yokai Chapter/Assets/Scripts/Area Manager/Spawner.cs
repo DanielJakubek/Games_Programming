@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     public string areaName; //Name of the current area
     public Vector2 spawnSize; //Size of the spawn area
     public LayerMask spawnable; //What surface the enemies can spawn on
+    public LayerMask notSpawnable;
 
     private void Start() {
         EventManager.eventMngr.startWave += SpawnWave; //Subs function to event
@@ -96,9 +97,12 @@ public class Spawner : MonoBehaviour
             //Transforms the grid location to the real game world position
             Vector3 realPosition = gridBottomLeft + Vector3.right * (randomX) + Vector3.forward * (randomY);
 
-            if(Physics.CheckSphere(realPosition, 1f, spawnable)){
-                canSpawn = true;
-                return realPosition;
+            if(Physics.CheckSphere(realPosition, 2f, spawnable)){
+                if(!Physics.CheckSphere(realPosition, 2f, notSpawnable)){
+                    canSpawn = true;
+                    return realPosition;
+                }
+                
             }else 
                 counter++;
 
@@ -111,7 +115,7 @@ public class Spawner : MonoBehaviour
   
     //Used to see how large the spawn area is
     private void OnDrawGizmos() {
-        Gizmos.DrawWireCube(transform.position, new Vector3(spawnSize.x, 1, spawnSize.y));
+        Gizmos.DrawWireCube(transform.position, new Vector3(spawnSize.x, 0, spawnSize.y));
     }
 
     //Unsubs the event when destroyed

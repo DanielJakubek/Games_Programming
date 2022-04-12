@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class is all about the player's movement.
+*/
 public class CharacterMovement : MonoBehaviour{
 
     [Header("Player movement")]
@@ -22,7 +23,8 @@ public class CharacterMovement : MonoBehaviour{
     public float runningStepRate; //Rate at which to play foot sounds
     public float walkingStepRate; //Rate at which to play foot sounds
     private float stepRate;
-    public AudioManager audioMng; //Audio manager
+
+    private AudioManager audioMng; //Audio manager
     private float waitTime; //How long it has been between steps
     
     public Camera playerCam; //Stores the player camera
@@ -33,9 +35,15 @@ public class CharacterMovement : MonoBehaviour{
     void Awake() {
         Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
 
+        
+
         chrController = GetComponent<CharacterController>(); //Gets the character controller
         gravityTemp = GetComponent<Gravity>(); //Gets the gravity script
         startingPosition = playerCam.transform.localPosition.y;
+    }
+
+    private void Start() {
+        audioMng = AudioManager.mngInstance;
     }
 
 
@@ -45,7 +53,6 @@ public class CharacterMovement : MonoBehaviour{
     }
 
     private void Update() {
-
         gravityTemp.playerJump(); //Calls the jump function from the gravity class
     }
 

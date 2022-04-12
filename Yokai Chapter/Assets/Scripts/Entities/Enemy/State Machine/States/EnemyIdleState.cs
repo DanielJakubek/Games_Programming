@@ -3,6 +3,9 @@ using UnityEngine.AI;
 
 public class EnemyIdleState : EnemyState
 {   
+    float currentHp;
+    public float health;
+
     //Constructor Paramters: The ones under "Enemy Properties" above this method
     public EnemyIdleState(EnemyTemplate enemyTemplate, GameObject target, GameObject itSelf, Animator enemyAnimator,  NavMeshAgent agent){
         this.enemyTemplate = enemyTemplate;
@@ -14,22 +17,21 @@ public class EnemyIdleState : EnemyState
 
     // Start is called before the first frame update
     public override void StartState(EnemyContex context){  
-
         agent.velocity = Vector3.zero;
         agent.isStopped = true;
 
         if(enemyAnimator != null)
-                enemyAnimator.SetInteger("Tranisiton", 0);//Plays idle animation
+            enemyAnimator.SetInteger("Transition", 0);//Plays idle animation
     }
 
     // Update is called once per frame
     public override void UpdateState(EnemyContex context){
+
         //Switches to the walking state when target enters attack zone
         if(EngageTarget()){
             AudioManager.mngInstance.PlaySound("Agro", AudioManager.mngInstance.sounds);
             context.SwitchStates(context.walkingState);
         }
-            
     }
 
     /*
@@ -40,7 +42,7 @@ public class EnemyIdleState : EnemyState
     */
     private bool EngageTarget(){
         //Switches the states
-        if(getDistanceBetween() < enemyTemplate.agroDistance)
+        if(getDistanceBetween() < enemyTemplate.agroDistance )
             return true;
         else
             return false;

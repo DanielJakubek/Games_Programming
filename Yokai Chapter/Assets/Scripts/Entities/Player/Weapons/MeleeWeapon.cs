@@ -1,9 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    This class deals with whap happens when the player is
+    using a sword as their weapon of choice. In this case, 
+    the basic animation will be played upon input and damage
+    will made applied to the enemy if the sword collides with
+    it.
+*/
 public class MeleeWeapon : Weapon
 {
+    //Variables to make sure the collison occurs once and only when attacking
+    private bool hasCollided = false;
+    private bool isAttacking = false;
+
     //Update is called once per frame
     private void Update(){
         getInput();
@@ -16,20 +25,33 @@ public class MeleeWeapon : Weapon
     */
     public override void HandleWeapon(){
 
-        //weaponAnimator.Play("Swing");
+        //Plays the sound assocciated with the attack
         weaponVFX();
 
-         //Shoots a ray from the player camera and whatever is hit will be stored in the out variable,
-        if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitTarget, weaponTemplate.range)){
+        //Variables that make sure the collision doesn't happen all the time.
+        hasCollided = false;
+        isAttacking = true;
+    }
 
-            //Creates an object of the Enemy class
-            NewEnemy enemy = hitTarget.transform.GetComponent<NewEnemy>();
-            
-            //If the player shot an enemy, make the enemy take damage
-             if(enemy !=null){
-                audioMng.PlaySound("EnemyHit", audioMng.sounds);
-                enemy.UpdateHealth(weaponTemplate.dmg);
-             }    
+    /*
+        Deals with executing code when the object has collided with
+        something with a collider. If that item has the tag of enemy then it
+        is deemed to be an enemy, and will apply this weapon's damage upon it. 
+    */
+    private void OnCollisionEnter(Collision collided) {
+
+        //If the weapon has hit an enemy, has yet to collide and player is attacking
+        if(collided.gameObject.tag == "Enemy" && !hasCollided && isAttacking){
+ 
+            audioMng.PlaySound("EnemyHit", audioMng.sounds); //Sound when enemy has been hit
+
+            //Gets the enemy script and applies damage to it's health variable
+            NewEnemy enemy = collided.transform.GetComponent<NewEnemy>();
+            enemy.UpdateHealth(weaponTemplate.dmg);
+
+            //The weapon has collided and is no longer atacking
+            hasCollided = true;
+            isAttacking = false;
         }
     }
 

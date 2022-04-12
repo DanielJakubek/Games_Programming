@@ -49,7 +49,7 @@ public class WeaponManager : MonoBehaviour
 
             //Decrease weapon counter if not at the start of list, otherwise go back to end.
             if(currentWeapon <= 0)
-                currentWeapon = transform.childCount - 1;
+                currentWeapon = transform.childCount - 1;  
             else    
                 currentWeapon--;
         }
@@ -69,8 +69,9 @@ public class WeaponManager : MonoBehaviour
         
         //For each child in the list, check if match has been found, if so, enable, otherwise, disable.
         foreach(Transform child in transform){
+           
             if(currentWeapon == temp)
-                child.gameObject.SetActive(true);
+                child.gameObject.SetActive(true);             
             else
                 child.gameObject.SetActive(false);
 

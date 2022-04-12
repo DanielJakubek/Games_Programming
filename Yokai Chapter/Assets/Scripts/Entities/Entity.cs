@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*  
@@ -11,7 +9,6 @@ public class Entity : MonoBehaviour
 {
     public float health; //The enemy health
     public RaycastHit hitTarget; //Stores the information of what was hit
-
     public GameObject impactParticle;
 
     /* Function called when updating hp */
@@ -34,6 +31,10 @@ public class Entity : MonoBehaviour
             
     }
 
+    /*
+        Deals with playing the particle when the
+        entity is "killed"
+    */
     private void KillParticle(){
         GameObject temp = Instantiate(impactParticle, transform.position+Vector3.up, Quaternion.Euler(-90f, 0f, 0f));
         gameObject.transform.parent = temp.transform;

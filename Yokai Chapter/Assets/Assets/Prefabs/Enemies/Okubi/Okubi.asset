@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Okubi
   health: 100
-  range: 20
-  bps: 0.4
+  range: 15
+  bps: 0.75
   damage: 25
   speed: 8
   agroDistance: 250

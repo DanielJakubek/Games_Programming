@@ -16,4 +16,11 @@ public abstract class EnemyState
     // Update is called once per frame
     public virtual void UpdateState(EnemyContex context){
     }
+
+    // Update is called once per frame
+    public virtual void FixedUpdateState(EnemyContex context){
+    }
+
+
+
 }

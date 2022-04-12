@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Interactable
   - Health
+  - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - Enemy
   - 
   - 
-  - 
+  - Rock
   - 
   - 
   - 

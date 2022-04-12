@@ -1,9 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+/*
+    This class deals with making 
+    the enemy walk towards the target and then changing to
+    an appropriate state whenever in close reach of the target
+*/
 public class EnemyWalkingState : EnemyState
 {      
     private bool isAgro = false; // If the enemy should be following player player
+    private Vector3 currnetLocation; //Used to see if player has moved positions
 
     //Constructor Paramters: The ones under "Enemy Properties" above this method
     public EnemyWalkingState(EnemyTemplate enemyTemplate, GameObject target, GameObject itSelf, Animator enemyAnimator, NavMeshAgent agent){
@@ -17,11 +23,18 @@ public class EnemyWalkingState : EnemyState
     //Used to carry out the state upon entry
     public override void StartState(EnemyContex context){   
         if(enemyAnimator != null)
-            enemyAnimator.SetInteger("Tranisiton", 1); //Plays walking animation
+            enemyAnimator.SetInteger("Transition", 1); //Plays walking animation
+
+        currnetLocation = target.transform.position;
     }
 
     // Update is called once per frame
     public override void UpdateState(EnemyContex context){
+       // Motion(context);
+    }
+
+    // Update is called once per frame
+    public override void FixedUpdateState(EnemyContex context){
         Motion(context);
     }
 
@@ -38,7 +51,7 @@ public class EnemyWalkingState : EnemyState
         float distanceBetweenEntities = getDistanceBetween();
 
         //Need to update each frame otherwise it does not want to change
-        agent.speed = enemyTemplate.speed;
+        //agent.speed = enemyTemplate.speed;
 
         //Go to attacking state when in attack range
         if(distanceBetweenEntities <= enemyTemplate.range){
@@ -59,9 +72,54 @@ public class EnemyWalkingState : EnemyState
 
         //Once agroed, always agroed
         if(isAgro){
-            agent.isStopped = false;
-            agent.destination = target.transform.position;
+            agent.speed = enemyTemplate.speed;
+            CheckMovement();
         }
+    }
+
+    /*
+        Used to see if there is any change in the target's 
+        position, if there isthen, make the enemy stop in it's tracks
+        and go towards the new position. This function came about
+        because the enemies where sliding on ice whenever
+        the target moved, it was wack.
+    */
+    private void CheckMovement(){
+
+        //position has changed
+        if(currnetLocation != target.transform.position){
+            
+            //Stops the enemy from sliding about
+            agent.velocity =  target.transform.position - itSelf.transform.position;
+            agent.isStopped = false;
+
+            //Stop current on currnet tracks
+            currnetLocation = target.transform.position;
+
+            //Moves the enemy towards the player
+            agent.SetDestination(currnetLocation);
+        }
+
+        if(enemyTemplate.name =="Okubi")
+            OkubiMotion();
+    }
+
+    /* 
+        Specific motion for the flying tpye enemy, Okubi. 
+        This function checks under the enemy to see if it is hitting the ground, if it is, then
+        it will increase the nav mesh agent offset, therefore making the object go up while
+        the agent stays on the navmesh. If it is hitting the ground then the offset is
+        decreased.
+    */
+    private void OkubiMotion(){
+
+        RaycastHit hitTarget;
+
+        //Shoots a ray from the enemy to see how far from the ground it is, if touching the ground then increase enemy offset, otherwise decrease
+        if(Physics.Raycast(itSelf.transform.position, -itSelf.transform.up, out hitTarget, 5f+target.transform.position.y))
+            agent.baseOffset += 0.001f;    
+        else
+          agent.baseOffset -= 0.001f;
     }
 
     /*
@@ -87,6 +145,9 @@ public class EnemyWalkingState : EnemyState
                 break;
             case "Projectile":
                 context.SwitchStates(context.projectileState);
+                break;
+            case "Explode":
+                context.SwitchStates(context.explodeState);
                 break;
             default:
                 context.SwitchStates(context.idleState);
