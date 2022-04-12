@@ -67,9 +67,8 @@ public class HitScanWeapon : Weapon
             audioMng.PlaySound("EnemyHit", audioMng.sounds);
             temp = Instantiate(hitParticle, hitTarget.point, Quaternion.LookRotation(hitTarget.normal));
         }
-        else{
+        else
             temp = Instantiate(impactParticle, hitTarget.point, Quaternion.LookRotation(hitTarget.normal));
-        }
 
         Destroy(temp,1);
     }

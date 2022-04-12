@@ -65,8 +65,6 @@ public class Spawner : MonoBehaviour
                     EnemyCounter.enmyCounterInstace.setAmountOfEnemies(temp);
                 }
             }
-
-              Debug.Log(EnemyCounter.enmyCounterInstace.getAmountOfEnemies());
         }
     }
 

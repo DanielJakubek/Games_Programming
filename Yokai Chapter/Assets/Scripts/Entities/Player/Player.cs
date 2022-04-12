@@ -87,7 +87,7 @@ public class Player : Entity
     */
     private void PlayerInteract(){
         //Shoots a ray from the player camera and whatever is hit will be stored in the out variable,
-        if(Physics.Raycast(transform.position, transform.forward, out hitTarget, 10f)){
+        if(Physics.Raycast(transform.position, transform.forward, out hitTarget, 6f)){
             if(hitTarget.transform.tag == "Interactable"){
                 if(Input.GetKeyDown("e"))
                     hitTarget.transform.gameObject.GetComponent<Interact>().DoInteract();

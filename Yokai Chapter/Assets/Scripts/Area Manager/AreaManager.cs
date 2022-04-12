@@ -8,15 +8,11 @@ using UnityEngine;
 */
 public class AreaManager : MonoBehaviour
 {
-    //Number of waves and tracker of currnet wave
-    public int numberOfWaves,currentWave;
+    public int numberOfWaves,currentWave; //Number of waves and tracker of currnet wave
     public string areaName; //What area the spawner is responsilbe for
-
-    public int spawnNextAfter = 0;
-
-    //The trigger area
-    private bool triggered,triggerOnce = false;
-   
+    public int spawnNextAfter = 0; //How many enemies remaning before next wave should spawn
+    private bool triggered,triggerOnce = false;  //The trigger area
+    
     // Update is called once per frame
     void Update()
     {   
@@ -29,19 +25,26 @@ public class AreaManager : MonoBehaviour
                 currentWave++;
 
                 //When last wave, make trigged false to no longer update
-                if(numberOfWaves < currentWave)
+                if(numberOfWaves < currentWave){
                     triggered = false;
+                    EventManager.eventMngr.CloseAllDoors();
+                }
             }
         }
     }
 
     /*
         Makes sure that the trigger is activate once and 
-        by the player
+        by the player. Also closes all doors and makes then
+        unopenable
     */
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Player"){
             if(!triggerOnce){
+
+                //close all doors and makes them un openable
+                EventManager.eventMngr.CloseAllDoors();
+
                 triggerOnce = true;
                 triggered = true;
             }
