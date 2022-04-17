@@ -81,5 +81,4 @@ public class EventManager : MonoBehaviour
         if(closeDoors != null)
             closeDoors();
     }  
-
 }

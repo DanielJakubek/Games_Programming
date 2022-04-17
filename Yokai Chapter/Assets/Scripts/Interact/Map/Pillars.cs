@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/*
+    Deals with player and door interaction
+*/
+public class Pillars : Interact
+{   
+    public GameObject pillars; //The pillars to move
+    private bool shouldRaise = false; //Should the pillars go up
+    private Vector3 newLocation; //Location of the pillars
+
+
+    //Called once at the start before the frame
+    private void Start() {
+        description = "Press 'E' To Start...";
+    }
+
+    //Called once every frame
+    private void Update() {
+        if(shouldRaise)
+            RaisePillars();
+    }
+
+    /* Deals with opening the door, if it is closed, the door will be moved upwards */
+    public override void DoInteract(){
+        transform.position =  new Vector3(transform.position.x, transform.position.y-10f, transform.position.z);  //Move the button down
+
+        //Location to move the pillars to and says that the pillars should move up
+        newLocation = new Vector3(pillars.transform.position.x, pillars.transform.position.y+53.1f, pillars.transform.position.z);
+        shouldRaise = true;
+    }
+
+    /*
+        Deals with moving the pillars and lava up to 
+        the top platform (changing the level). This is done by
+        setting the pillar game object to active and moving it 
+        upwards until it has been reached
+    */
+    private void RaisePillars(){
+        if(pillars != null){
+
+            //Make active if not already
+            if(!pillars.activeSelf)
+                pillars.SetActive(true);
+            
+            //Move the pillars to their location
+            pillars.transform.position = Vector3.MoveTowards(pillars.transform.position, newLocation, 5f*Time.deltaTime);
+
+            //If the pillar have reached their new location stop moving them
+            if(pillars.transform.position == newLocation){
+                pillars.transform.position = newLocation;
+                shouldRaise = false;
+            }
+        }
+    }
+
+    //What is shown when the player hovers over an interactable item
+    private void OnMouseOver() {
+
+        //Only displays when player is within range
+        if(Vector3.Distance(Player.playerInstance.transform.position, transform.position) <= 7f)
+            descriptionText.text = description.ToString();
+        else
+            OnMouseExit();
+    }
+
+    //What is shown when the player hovers over an interactable item
+    private void OnMouseExit() {
+        descriptionText.text = "".ToString();
+    }
+}

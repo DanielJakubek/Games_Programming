@@ -21,6 +21,4 @@ public abstract class EnemyState
     public virtual void FixedUpdateState(EnemyContex context){
     }
 
-
-
 }

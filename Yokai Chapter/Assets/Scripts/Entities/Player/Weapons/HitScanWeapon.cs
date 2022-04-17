@@ -44,22 +44,14 @@ public class HitScanWeapon : Weapon
         weaponVFX();//Weapon sounds and animation
 
         //Shoots a ray from the player camera and whatever is hit will be stored in the out variable,
-        if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitTarget, weaponTemplate.range)){
-
-            //Creates an object of the Enemy class
-            NewEnemy enemy = hitTarget.transform.GetComponent<NewEnemy>();
-            
-            //If the player shot an enemy, make the enemy take damage
-             if(enemy !=null){
-                 enemy.UpdateHealth(weaponTemplate.dmg);
-                ImpactParticleInstantiate(true);
-             }
-             else
-                ImpactParticleInstantiate(false);
-        }
+        if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitTarget, weaponTemplate.range))
+            FindShotType(hitTarget.transform);
     }
 
-    private void ImpactParticleInstantiate(bool hitEnemy){
+    /*
+        Particles that appear when then enemy dies
+    */
+    public override void ImpactParticleInstantiate(bool hitEnemy){
 
         GameObject temp;
 

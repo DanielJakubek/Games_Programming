@@ -55,4 +55,48 @@ public class Weapon : MonoBehaviour
 
     /* Handles weapon operation */
     public virtual void HandleWeapon(){}
+
+
+    /*
+        Deals with finding out what target was hit
+        and then doing the approprate action
+    */
+    public void FindShotType(Transform targetHit){
+
+        //Switch to see if bullet hit an interactable object
+        switch(targetHit.tag){
+
+            case "Enemy":
+                NewEnemy enemy = targetHit.transform.GetComponent<NewEnemy>();
+                if(enemy != null)
+                    enemy.UpdateHealth(weaponTemplate.dmg);
+                
+                ImpactParticleInstantiate(true);
+
+                Debug.Log("Enemy hit");
+            break;
+
+            case "Boss":
+                BossEnemy boss = targetHit.transform.GetComponent<BossEnemy>();
+                    if(boss != null)
+                        boss.UpdateHealth(weaponTemplate.dmg);
+
+                Debug.Log("Boss hit");
+            break;
+
+            case "Explode":
+                Explode explode = targetHit.transform.GetComponent<Explode>();
+                    if(explode != null)
+                        explode.UpdateHealth(weaponTemplate.dmg);
+
+                Debug.Log("Explode hit");
+            break;
+
+            default:
+                ImpactParticleInstantiate(false);
+            break;
+        }
+    }
+
+    public virtual void ImpactParticleInstantiate(bool hitEnemy){}
 }

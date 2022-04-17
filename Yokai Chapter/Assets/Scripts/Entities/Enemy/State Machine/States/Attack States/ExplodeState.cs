@@ -36,7 +36,7 @@ public class ExplodeState : EnemyAttackingState
 
         //This calls the coroutine through another script. Scuffed, but it works..
         //https://www.reddit.com/r/Unity3D/comments/qetikf/coroutines_how_to_call_from_your_nonmonobehavior/
-        AudioManager.mngInstance.StartCoroutine(HandleExplode());
+        context.StartCoroutine(HandleExplode());
     }
 
 

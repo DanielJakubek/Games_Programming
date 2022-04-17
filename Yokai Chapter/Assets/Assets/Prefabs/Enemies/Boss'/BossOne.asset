@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06a1afd880dc71a4b96e3d3a173850ea, type: 3}
-  m_Name: Long Corridor - 1
+  m_Script: {fileID: 11500000, guid: 4b2d4e461a1beaf42a1e41ea3d649ea7, type: 3}
+  m_Name: BossOne
   m_EditorClassIdentifier: 
-  enemyList:
-  - enemyName: Umi
-    amountOfEnemies: 6
-  - enemyName: Okubi
-    amountOfEnemies: 1
+  bossName: BossOne
+  health: 666
+  attackSpeed: 2
+  restLength: 5
+  damageOne: 25
+  damageTwo: 75
+  speed: 20

@@ -95,14 +95,13 @@ public class Spawner : MonoBehaviour
             //Transforms the grid location to the real game world position
             Vector3 realPosition = gridBottomLeft + Vector3.right * (randomX) + Vector3.forward * (randomY);
 
-            if(Physics.CheckSphere(realPosition, 2f, spawnable)){
-                if(!Physics.CheckSphere(realPosition, 2f, notSpawnable)){
+            if(!Physics.CheckSphere(realPosition, 5f, notSpawnable)){
+                if(Physics.CheckSphere(realPosition, 2f, spawnable)){
                     canSpawn = true;
                     return realPosition;
-                }
-                
-            }else 
-                counter++;
+                }else 
+                    counter++;
+            }
 
         //Loops while a sufficent spawn location has not been found or 5 attempts have been made
         }while(!canSpawn || counter < 5);

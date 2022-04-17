@@ -25,8 +25,7 @@ public class Entity : MonoBehaviour
             EnemyCounter.enmyCounterInstace.setAmountOfEnemies(temp);
 
             Destroy(gameObject);
-            
-
+        
         }
             
     }

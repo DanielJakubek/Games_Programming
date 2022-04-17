@@ -8,6 +8,8 @@ TagManager:
   - Health
   - Enemy
   - Obstacle
+  - Boss
+  - Explode
   layers:
   - Default
   - TransparentFX

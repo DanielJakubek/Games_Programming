@@ -40,14 +40,8 @@ public class MeleeWeapon : Weapon
     */
     private void OnCollisionEnter(Collision collided) {
 
-        //If the weapon has hit an enemy, has yet to collide and player is attacking
-        if(collided.gameObject.tag == "Enemy" && !hasCollided && isAttacking){
- 
-            audioMng.PlaySound("EnemyHit", audioMng.sounds); //Sound when enemy has been hit
-
-            //Gets the enemy script and applies damage to it's health variable
-            NewEnemy enemy = collided.transform.GetComponent<NewEnemy>();
-            enemy.UpdateHealth(weaponTemplate.dmg);
+        if(!hasCollided && isAttacking){
+            FindShotType(collided.transform); //Finds what enemy was hit and deals dmg to it
 
             //The weapon has collided and is no longer atacking
             hasCollided = true;
