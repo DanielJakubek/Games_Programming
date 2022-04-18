@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
-    Deals with player and door interaction
+    Deals with player and boss pillar interaction
 */
 public class Pillars : Interact
 {   
     public GameObject pillars; //The pillars to move
+    public float shakeStrength = 0.2f; //How powerful the camera shake will be
     private bool shouldRaise = false; //Should the pillars go up
     private Vector3 newLocation; //Location of the pillars
 
@@ -45,12 +44,15 @@ public class Pillars : Interact
             if(!pillars.activeSelf)
                 pillars.SetActive(true);
             
-            //Move the pillars to their location
+            //Move the pillars to their location and start camera shake
             pillars.transform.position = Vector3.MoveTowards(pillars.transform.position, newLocation, 5f*Time.deltaTime);
+            EventManager.eventMngr.StartCameraShake(shakeStrength);
 
-            //If the pillar have reached their new location stop moving them
+            //If the pillar have reached their new location stop moving them, also stop camera shake
             if(pillars.transform.position == newLocation){
                 pillars.transform.position = newLocation;
+
+                EventManager.eventMngr.StopCameraShake();
                 shouldRaise = false;
             }
         }

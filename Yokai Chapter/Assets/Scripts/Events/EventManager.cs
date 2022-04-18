@@ -81,4 +81,17 @@ public class EventManager : MonoBehaviour
         if(closeDoors != null)
             closeDoors();
     }  
+
+
+    public event Action<float> startCameraShake; //Event to start camera shaking
+    public void StartCameraShake(float strength){
+        if(startCameraShake != null)
+            startCameraShake(strength);
+    } 
+
+    public event Action stopCameraShake; //Event to start camera shaking
+    public void StopCameraShake(){
+        if(stopCameraShake != null)
+            stopCameraShake();
+    } 
 }

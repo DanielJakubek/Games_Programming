@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 /*
     This class deals with the player properies
@@ -7,10 +8,15 @@ using UnityEngine;
 */
 public class Player : Entity
 {      
-     public static Player playerInstance; 
+    public static Player playerInstance; 
+
+    public GameObject bloodSplatterUI; //The taking damage splatter effect
+    private float waitDamageUI = 0f; //How long before the splatter effect disappears
 
     [Header("Player stats")]
     public float armour = 75f; //The players armour
+    private float oldHealth;
+    private float oldArmour;
 
     // Awake is called before the first frame update and before start
     void Awake(){
@@ -25,9 +31,6 @@ public class Player : Entity
         DontDestroyOnLoad(gameObject);
     }
 
-
-    float oldHealth;
-    float oldArmour;
 
     //Start is called before the first frame update
     private void Start() {
@@ -52,6 +55,9 @@ public class Player : Entity
             oldHealth = health;
             oldArmour = armour;
         }
+
+        if(bloodSplatterUI.activeSelf)
+            StartCoroutine(BloodSplatterUI());
     }
 
     /*
@@ -75,10 +81,15 @@ public class Player : Entity
             playerInstance.armour = 0; //Make armour zero because it should be now.
         }
 
+        //Show blood splatter effect if exists
+        if(bloodSplatterUI !=null){
+            waitDamageUI += 5f;
+            bloodSplatterUI.SetActive(true);
+        }
+           
         //Play sound upon taking damage
         AudioManager.mngInstance.PlaySound("GotHit", AudioManager.mngInstance.sounds);
     }
-
 
     /*
         Deals with player interacting with doors and other "Interactable" items. This is done
@@ -93,5 +104,14 @@ public class Player : Entity
                     hitTarget.transform.gameObject.GetComponent<Interact>().DoInteract();
             }
         }
+    }
+
+    /* Hides the blood splatter effect after x seconds*/
+    IEnumerator BloodSplatterUI(){
+        
+        yield return new WaitForSeconds(waitDamageUI);
+
+        if(bloodSplatterUI !=null)
+            bloodSplatterUI.SetActive(false);
     }
 }

@@ -2,37 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    Deals moving the camera where the player is looking
+    but also shaking the camera when something happens
+*/
 public class PlayerCamera : MonoBehaviour
 {
     [Header("Player Settings")]
     [Range(0f,400f)]
     public float mouseSen = 500f; //The sensitivty of the mouse
 
-
     [Header("Player Object")]
     public Transform thePlayer; //Stores the player gameObject
 
-    float xAxis, yAxis; //Mouse axis used for camera movement.
-    float rotateXAxis = 0f;
+    private float xAxis, yAxis; //Mouse axis used for camera movement.
+    private float rotateXAxis = 0f;
 
+    [Header("Camera Shake")]
+    private Vector3 startPosition; //Starting position of the camera
+    private float strength = 0.1f; //How extreme the camera shake is
+    private bool shake = false; //Should the camera shake or not
+
+    // Awake is called before the first frame update
+    private void Awake() {
+        Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
+    }
 
     // Start is called before the first frame update
-    private void Awake() {
-        
-        //Gets the player by searching for the player tag and finds its Transform.
-        thePlayer = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Transform>();
+    private void Start() {
+        //Gets the player transform
+        thePlayer = Player.playerInstance.transform;
 
-        //Assigns the character object to the transfrom variable
-        Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
+        //Subscribes functions to events
+        EventManager.eventMngr.startCameraShake += ShakeOn;
+        EventManager.eventMngr.stopCameraShake += ShakeOff;
     }
 
     // Update is called once per frame
     void Update(){
-        
         MouseControl();
+
+        if(shake)
+            StartCoroutine(ShakeCam());
     }
-
-
 
     /*  
         Used to get the player mouse inputs and then it roates the camera and player 
@@ -53,5 +65,50 @@ public class PlayerCamera : MonoBehaviour
         //Rotates the object relative to its parent object
         transform.localRotation = Quaternion.Euler(rotateXAxis, 0f, 0f);
         thePlayer.Rotate(Vector3.up * xAxis);
+    }
+
+
+    /*
+        Shakes the camera while shake is true. Does
+        this by getting a random number between one and minus one 
+        and setting the camera's x/y to that random value.
+        After the shaking is done, the camera is reverted back to
+        its original position.
+
+        Inspired by: https://youtu.be/9A9yj8KnM8c
+    */
+    IEnumerator ShakeCam(){
+
+        //Gets the starting position of the camera
+        startPosition = transform.localPosition;
+  
+        while(shake){
+            float x = Random.Range(-1f, 1f) * strength;
+            float y = Random.Range(-1f, 1f) * strength;
+
+            transform.localPosition = new Vector3(x,y,startPosition.z);
+            yield return null;
+        }
+
+        transform.localPosition = startPosition;  
+    }
+
+    /*
+        Tells the camera to start shaking
+        Parameter: float Strength, how extreme the shake is
+    */
+    public void ShakeOn(float strength){
+        shake = true;
+        this.strength = strength;
+    }
+
+    /* Tells the camera to stop shaking */
+    public void ShakeOff(){
+        shake = false;
+    }
+
+    /* When this object is destroyed */
+    private void OnDestroy() {
+        EventManager.eventMngr.startCameraShake -= ShakeOn;
     }
 }

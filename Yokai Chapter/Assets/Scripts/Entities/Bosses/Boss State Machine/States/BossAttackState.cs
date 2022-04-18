@@ -27,8 +27,6 @@ public class BossAttackState : BossState
         ballCount = 0;
         rotation = 720f;
 
-        
-
         if(enemyAnimator != null)
             enemyAnimator.SetInteger("Transition", 1);
     }
