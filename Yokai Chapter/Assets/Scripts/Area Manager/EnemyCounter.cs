@@ -26,6 +26,10 @@ public class EnemyCounter : MonoBehaviour{
     //Setter
     public void setAmountOfEnemies(int amountOfEnemies){
         this.amountOfEnemies = amountOfEnemies;
+
+        //Makes sure that the number is never less than zero
+        if(amountOfEnemies < 0)
+            amountOfEnemies = 0;
     }
 
     //Getter

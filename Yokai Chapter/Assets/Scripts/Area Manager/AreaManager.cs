@@ -39,7 +39,7 @@ public class AreaManager : MonoBehaviour
         unopenable
     */
     private void OnTriggerEnter(Collider other) {
-        if(other.tag == "Player"){
+        if(other.tag == "Player" || other.tag == "Trigger"){
             if(!triggerOnce){
 
                 //close all doors and makes them un openable

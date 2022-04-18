@@ -9,6 +9,7 @@ public class Prototype : MonoBehaviour
 {   
     public static Prototype prototypeInstance; //Instance of this object
     public GameObject[] enemies; //List of enemies in the game
+    public GameObject[] items; //List of items in the game
 
     // Start is called before the first frame update
     private void Awake(){
@@ -40,5 +41,21 @@ public class Prototype : MonoBehaviour
         }
         return null;
     }
-  
+
+    /*
+        Getter for the enemy game object.
+        Iterates through the list of enemies until it finds
+        the one that is being looked for.
+
+        Paramters: enemyName, the name of the gameobject to look for
+        Returns: gameobject, the enemy to be cloned. Null if nothing found
+    */
+    public GameObject GetItem(string itemName){
+
+        foreach(GameObject item in items){
+            if(item.name == itemName)
+                return item;
+        }
+        return null;
+    }
 }

@@ -10,6 +10,7 @@ TagManager:
   - Obstacle
   - Boss
   - Explode
+  - Trigger
   layers:
   - Default
   - TransparentFX
