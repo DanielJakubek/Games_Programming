@@ -30,6 +30,12 @@ public class ProjectileState : EnemyAttackingState
             context.SwitchStates(context.walkingState);
         }
 
+        //Changes to the flee state
+        if(getDistanceBetween() <= enemyTemplate.fleeDistance){
+            context.SwitchStates(context.fleeState);
+            return;
+        }
+
        CheckSeePlayer();
     }
 
@@ -45,7 +51,7 @@ public class ProjectileState : EnemyAttackingState
         //Shoots a ray from the enemy is hit will be stored in the out variable,
         if(Physics.Raycast(temp, itSelf.transform.forward, out hitTarget, enemyTemplate.range)){
             //if(hitTarget.transform.tag == "Player")   
-                AttackTarget();
+            AttackTarget();
         } 
     }
 

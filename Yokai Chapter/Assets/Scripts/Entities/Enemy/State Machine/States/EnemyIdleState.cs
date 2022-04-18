@@ -47,14 +47,4 @@ public class EnemyIdleState : EnemyState
         else
             return false;
     }
-
-    /*
-        Used to get the distance between the target and this object
-        Returns: Float, the distance between the two entities
-    */
-    private float getDistanceBetween(){
-        //Gets the vector 3 of the target adn then gets the distance between the target and itself
-        Vector3 moveLocation = target.transform.position;
-        return Vector3.Distance(itSelf.transform.position, moveLocation);
-    }
 }

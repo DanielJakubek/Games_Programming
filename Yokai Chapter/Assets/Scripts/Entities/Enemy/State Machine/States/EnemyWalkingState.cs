@@ -8,7 +8,7 @@ using UnityEngine.AI;
 */
 public class EnemyWalkingState : EnemyState
 {      
-    private bool isAgro = false; // If the enemy should be following player player
+    private bool isAgro = true; // If the enemy should be following player player
     private Vector3 currnetLocation; //Used to see if player has moved positions
 
     //Constructor Paramters: The ones under "Enemy Properties" above this method
@@ -33,18 +33,21 @@ public class EnemyWalkingState : EnemyState
        // Motion(context);
     }
 
-    // Update is called once per frame
+    /// <summary> Update is called once per frame 
+    /// </summary>
+    /// <param name="context">The current state </param>
     public override void FixedUpdateState(EnemyContex context){
         Motion(context);
     }
 
-    /*
-        Deals with moving the enemy towards the player and staying wihin a certain distance. 
-        This is done by getting the distance between the two targets and if the distance is too great, 
-        follow the target, else go to the attacking state
 
-        Parameter: contect, EnemyContext, the context class
-    */
+    /// <summary>
+    /// Deals with moving the enemy towards the player and staying wihin a certain distance. 
+    /// This is done by getting the distance between the two targets and if the distance is too great, 
+    /// follow the target, else go to the attacking state
+    // Parameter: contect, EnemyContext, the context class
+    /// </summary>
+    /// <param name="context">The current state</param>
     public void Motion(EnemyContex context){
 
         //Distance between the enemy and target
@@ -52,6 +55,11 @@ public class EnemyWalkingState : EnemyState
 
         //Need to update each frame otherwise it does not want to change
         //agent.speed = enemyTemplate.speed;
+
+        if(distanceBetweenEntities <= enemyTemplate.fleeDistance){
+             context.SwitchStates(context.fleeState);
+             return;
+        }
 
         //Go to attacking state when in attack range
         if(distanceBetweenEntities <= enemyTemplate.range){
@@ -61,13 +69,6 @@ public class EnemyWalkingState : EnemyState
             agent.isStopped = true;
 
             GetAttackState(context);
-    
-        //Go follow the player when the player is in agro range
-        }else if(distanceBetweenEntities <= enemyTemplate.agroDistance){
-            isAgro = true;
-        }
-        else if(distanceBetweenEntities <= enemyTemplate.fleeDistance){
-            //switch to flee state
         }
 
         //Once agroed, always agroed
@@ -77,13 +78,13 @@ public class EnemyWalkingState : EnemyState
         }
     }
 
-    /*
-        Used to see if there is any change in the target's 
-        position, if there isthen, make the enemy stop in it's tracks
-        and go towards the new position. This function came about
-        because the enemies where sliding on ice whenever
-        the target moved, it was wack.
-    */
+    /// <summary>
+    /// Used to see if there is any change in the target's 
+    /// position, if there isthen, make the enemy stop in it's tracks
+    /// and go towards the new position. This function came about
+    /// because the enemies where sliding on ice whenever
+    /// the target moved, it was wack.
+    /// </summary>
     private void CheckMovement(){
 
         //position has changed
@@ -104,13 +105,13 @@ public class EnemyWalkingState : EnemyState
             OkubiMotion();
     }
 
-    /* 
-        Specific motion for the flying tpye enemy, Okubi. 
-        This function checks under the enemy to see if it is hitting the ground, if it is, then
-        it will increase the nav mesh agent offset, therefore making the object go up while
-        the agent stays on the navmesh. If it is hitting the ground then the offset is
-        decreased.
-    */
+    /// <summary>
+    /// Specific motion for the flying tpye enemy, Okubi. 
+    /// This function checks under the enemy to see if it is hitting the ground, if it is, then
+    /// it will increase the nav mesh agent offset, therefore making the object go up while
+    /// the agent stays on the navmesh. If it is hitting the ground then the offset is
+    /// decreased.
+    /// </summary>
     private void OkubiMotion(){
 
         RaycastHit hitTarget;
@@ -122,19 +123,9 @@ public class EnemyWalkingState : EnemyState
           agent.baseOffset -= 0.001f;
     }
 
-    /*
-        Used to get the distance between the target and this object
-        Returns: Float, the distance between the two entities
-    */
-    private float getDistanceBetween(){
-        //Gets the vector 3 of the target adn then gets the distance between the target and itself
-        Vector3 moveLocation = target.transform.position;
-        return Vector3.Distance(itSelf.transform.position, target.transform.position);
-    }
-
-    /*  
-        Deals with switching to the correct attack state depending on the enemy attack type
-    */
+    /// <summary>
+    ///Deals with switching to the correct attack state depending on the enemy attack type
+    /// </summary>
     private void GetAttackState(EnemyContex context){
         switch(enemyTemplate.enemyAtckType){
             case "Melee":

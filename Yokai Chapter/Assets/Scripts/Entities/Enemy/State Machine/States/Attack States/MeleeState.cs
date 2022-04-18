@@ -36,7 +36,7 @@ public class MeleeState : EnemyAttackingState
         Used to get the distance between the target and this object
         Returns: Float, the distance between the two entities
     */
-    public float getDistanceBetween(){
+    public override float getDistanceBetween(){
         return Vector3.Distance(itSelf.transform.position, target.transform.position);
     }
 }

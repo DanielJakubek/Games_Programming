@@ -21,4 +21,14 @@ public abstract class EnemyState
     public virtual void FixedUpdateState(EnemyContex context){
     }
 
+
+    /// <summary>
+    /// Used to get the distance between the target and this object
+    /// Returns: Float, the distance between the two entities
+    /// </summary>
+    public virtual float getDistanceBetween(){
+        //Gets the vector 3 of the target adn then gets the distance between the target and itself
+        Vector3 moveLocation = target.transform.position;
+        return Vector3.Distance(itSelf.transform.position, target.transform.position);
+    }
 }

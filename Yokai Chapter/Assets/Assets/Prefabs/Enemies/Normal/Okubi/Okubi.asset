@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Okubi
   health: 100
-  range: 15
+  range: 25
   bps: 0.75
   damage: 25
   speed: 8
   agroDistance: 250
-  fleeDistance: 15
+  fleeDistance: 20
   enemyAtckType: Projectile

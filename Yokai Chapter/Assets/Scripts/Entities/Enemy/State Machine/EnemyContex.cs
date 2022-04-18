@@ -34,6 +34,7 @@ public class EnemyContex : MonoBehaviour
 
         idleState = new EnemyIdleState(enemyTemplate, target, gameObject, enemyAnimator, agent);
         walkingState = new EnemyWalkingState(enemyTemplate, target, gameObject, enemyAnimator, agent);
+        fleeState = new EnemyFleeState(enemyTemplate, target, gameObject, enemyAnimator, agent);
 
         switch(enemyTemplate.enemyAtckType){
             
@@ -49,10 +50,8 @@ public class EnemyContex : MonoBehaviour
             case "Explode":
                 explodeState = new ExplodeState(enemyTemplate, target, gameObject, enemyAnimator, agent);
             break;
-
         }
 
-        fleeState = new EnemyFleeState();
     }
         
     // Start is called before the first frame update

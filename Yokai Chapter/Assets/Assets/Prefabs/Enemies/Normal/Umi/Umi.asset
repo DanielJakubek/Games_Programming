@@ -19,5 +19,5 @@ MonoBehaviour:
   damage: 10
   speed: 8
   agroDistance: 200
-  fleeDistance: 15
+  fleeDistance: -2
   enemyAtckType: Melee
