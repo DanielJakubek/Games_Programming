@@ -12,6 +12,10 @@ public class Lava : MonoBehaviour
     private float waitTime; //How much time has passed
     private bool colliding = false; //Should the player take damage/is colliding with the object
 
+    // Start is called once before the first frame
+    private void Start() {
+        AudioManager.mngInstance.PlaySound("Lava", AudioManager.mngInstance.sounds);
+    }
 
     // Update is called once per frame
     void Update(){
@@ -41,6 +45,8 @@ public class Lava : MonoBehaviour
         if(Time.time > waitTime){
             waitTime = Time.time + 1f/tick;
             Player.playerInstance.UpdateHealth(damage);
+
+            AudioManager.mngInstance.PlaySound("Sizzle", AudioManager.mngInstance.sounds); //Play sound
         }
     }
 }

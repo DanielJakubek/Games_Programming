@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
             i.source = gameObject.AddComponent<AudioSource>();         
             i.source.clip = i.soundClip;   
             i.source.volume = i.volume;   
-            i.source.loop = i.loop;  
+            i.source.loop = i.loop; 
         }
     }
 
@@ -52,14 +52,33 @@ public class AudioManager : MonoBehaviour
     /* Finds the sound we want in the sounds array and then plays it. */
     public void PlaySound(string soundName, Sounds[] soundArray){
 
-        Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
-        
-        //Checks if the sounds exsits, if so then play the sound otherwise have a console message
-        if(foundSound != null)
-            foundSound.source.Play();
-        else{
-            Debug.Log("The sound: " +  soundName + " was not found");
-            return;
+        if(soundName !=null && soundArray !=null){
+            Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
+              
+            //Checks if the sounds exsits, if so then play the sound otherwise have a console message
+            if(foundSound != null)
+                foundSound.source.Play();
+            else{
+                Debug.Log("The sound: " +  soundName + " was not found");
+                return;
+            }
+            
+        }
+    }
+
+    /* Finds the sound we want in the sounds array and then stops it. */
+    public void StopSound(string soundName, Sounds[] soundArray){
+
+        if(soundName !=null && soundArray !=null){
+            Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
+            
+            //Checks if the sounds exsits, if so then play the sound otherwise have a console message
+            if(foundSound != null)
+                foundSound.source.Stop();
+            else{
+                Debug.Log("The sound: " +  soundName + " was not found");
+                return;
+            }
         }
     }
 }

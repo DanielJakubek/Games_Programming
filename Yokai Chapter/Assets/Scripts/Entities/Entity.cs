@@ -24,10 +24,9 @@ public class Entity : MonoBehaviour
             int temp = EnemyCounter.enmyCounterInstace.getAmountOfEnemies() -1;
             EnemyCounter.enmyCounterInstace.setAmountOfEnemies(temp);
 
+            AudioManager.mngInstance.PlaySound("Canistar", AudioManager.mngInstance.sounds); //Play sound
             Destroy(gameObject);
-        
-        }
-            
+        }     
     }
 
     /*

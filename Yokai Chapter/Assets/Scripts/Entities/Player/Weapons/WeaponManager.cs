@@ -70,8 +70,10 @@ public class WeaponManager : MonoBehaviour
         //For each child in the list, check if match has been found, if so, enable, otherwise, disable.
         foreach(Transform child in transform){
            
-            if(currentWeapon == temp)
-                child.gameObject.SetActive(true);             
+            if(currentWeapon == temp){
+                AudioManager.mngInstance.PlaySound("WeaponSwitch", AudioManager.mngInstance.sounds); //Play sound
+                child.gameObject.SetActive(true);   
+            }        
             else
                 child.gameObject.SetActive(false);
 

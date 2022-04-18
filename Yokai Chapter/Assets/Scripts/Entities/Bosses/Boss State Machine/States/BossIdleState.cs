@@ -12,6 +12,9 @@ public class BossIdleState : BossState
 
     // Start is called before the first frame update
     public override void StartState(BossContext context){  
+
+    AudioManager.mngInstance.PlaySound("SteamHiss", AudioManager.mngInstance.sounds); //Stop sound
+
        if(enemyAnimator != null)
            enemyAnimator.SetInteger("Transition", 0);//Plays idle animation
     }

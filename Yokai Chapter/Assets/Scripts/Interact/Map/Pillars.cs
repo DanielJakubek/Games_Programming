@@ -31,6 +31,8 @@ public class Pillars : Interact
         shouldRaise = true;
     }
 
+    bool playSound = true;
+
     /*
         Deals with moving the pillars and lava up to 
         the top platform (changing the level). This is done by
@@ -48,11 +50,19 @@ public class Pillars : Interact
             pillars.transform.position = Vector3.MoveTowards(pillars.transform.position, newLocation, 5f*Time.deltaTime);
             EventManager.eventMngr.StartCameraShake(shakeStrength);
 
+            //Plays sound once (looped)
+            if(playSound){
+                AudioManager.mngInstance.PlaySound("StoneFriction", AudioManager.mngInstance.sounds); //Play sound
+                playSound = false;
+            }
+                
             //If the pillar have reached their new location stop moving them, also stop camera shake
             if(pillars.transform.position == newLocation){
                 pillars.transform.position = newLocation;
 
                 EventManager.eventMngr.StopCameraShake();
+                AudioManager.mngInstance.StopSound("StoneFriction", AudioManager.mngInstance.sounds); //Stop sound
+
                 shouldRaise = false;
             }
         }

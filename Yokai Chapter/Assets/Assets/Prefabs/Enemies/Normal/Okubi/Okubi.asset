@@ -19,5 +19,5 @@ MonoBehaviour:
   damage: 25
   speed: 8
   agroDistance: 250
-  fleeDistance: 20
+  fleeDistance: 10
   enemyAtckType: Projectile

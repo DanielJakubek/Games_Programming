@@ -84,7 +84,9 @@ public class BossAttackState : BossState
     private void BeamDamage(Vector3 beamEnd){
 
         RaycastHit hit;
-        
+
+        AudioManager.mngInstance.PlaySound("Beam", AudioManager.mngInstance.sounds); //Play sound
+
         //Checks if the beam hits anything
         if(Physics.Raycast(bossWeapons.weaponThree.transform.position, beamEnd, out hit, 100f)){
 
@@ -118,8 +120,10 @@ public class BossAttackState : BossState
       
         //Switches to the rest phase after the rotation has finished
         if(rotation <= 0){
+           
 
             bossWeapons.weaponThree.SetActive(false);
+            AudioManager.mngInstance.StopSound("Beam", AudioManager.mngInstance.sounds); //Stop sound
              
             //Switch to rest phase
             context.SwitchStates(context.bossRestState);

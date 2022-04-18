@@ -18,6 +18,7 @@ public class Sounds
     [Range(0f,1f)]
     public float spatialBlend = 1;
     public bool loop;
+    
 
     [HideInInspector]
     public AudioSource source;

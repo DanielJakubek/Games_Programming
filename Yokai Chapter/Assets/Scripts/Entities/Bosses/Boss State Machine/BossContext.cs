@@ -67,6 +67,12 @@ public class BossContext : MonoBehaviour
     public void InstantiateObject(GameObject prefab, GameObject origin, float dmg){
         Instantiate(prefab, origin.transform.position, origin.transform.rotation).GetComponent<Fireball>().SetDmg(dmg);
     }
+
+    //Stops loops sounds from this entity
+    private void OnDestroy() {
+        AudioManager.mngInstance.StopSound("Beam", AudioManager.mngInstance.sounds); //Stop sound
+    }
+
 }
 /* Struct holding gameobject of Boss's weapons */
 [System.Serializable]
