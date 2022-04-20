@@ -56,7 +56,7 @@ public class WeaponManager : MonoBehaviour
 
         //If there has been a weapon switch
         if(prevWeapon !=currentWeapon)
-             EnableWeapon();
+            EnableWeapon();
     }
     
     /*
@@ -70,14 +70,15 @@ public class WeaponManager : MonoBehaviour
         //For each child in the list, check if match has been found, if so, enable, otherwise, disable.
         foreach(Transform child in transform){
            
+            //If next weapon and and unclocked
             if(currentWeapon == temp){
                 AudioManager.mngInstance.PlaySound("WeaponSwitch", AudioManager.mngInstance.sounds); //Play sound
                 child.gameObject.SetActive(true);   
-            }        
+            }    
             else
-                child.gameObject.SetActive(false);
-
+                child.gameObject.SetActive(false); //If the next weapon is unlocked
             temp++;
         }
     }
 }
+

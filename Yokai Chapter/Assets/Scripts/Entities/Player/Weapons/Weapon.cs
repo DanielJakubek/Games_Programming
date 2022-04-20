@@ -27,6 +27,8 @@ public class Weapon : MonoBehaviour
         EventManager.eventMngr.OnAmmoUse(weaponTemplate.ammo);
         EventManager.eventMngr.OnWeaponSwitch(weaponTemplate.name);
 
+        
+        playerCamera = GameObject.FindGameObjectWithTag("MainCam").GetComponent<Camera>();
         audioMng = AudioManager.mngInstance;
 
     }

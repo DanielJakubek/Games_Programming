@@ -94,4 +94,10 @@ public class EventManager : MonoBehaviour
         if(stopCameraShake != null)
             stopCameraShake();
     } 
+
+    public event Action firstBossDeath; //Event to start whatever after first boss' death
+    public void FirstBossDeath(){
+        if(firstBossDeath != null)
+            firstBossDeath();
+    } 
 }

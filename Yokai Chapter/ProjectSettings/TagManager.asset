@@ -11,6 +11,7 @@ TagManager:
   - Boss
   - Explode
   - Trigger
+  - MainCam
   layers:
   - Default
   - TransparentFX

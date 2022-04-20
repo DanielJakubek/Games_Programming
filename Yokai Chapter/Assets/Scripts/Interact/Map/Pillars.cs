@@ -10,6 +10,17 @@ public class Pillars : Interact
     private bool shouldRaise = false; //Should the pillars go up
     private Vector3 newLocation; //Location of the pillars
 
+    public static Pillars pillarInstace;  //Instance of this object
+
+    private void Awake() {
+        //Makes sure there is a single pillar
+        if(pillarInstace == null){
+            pillarInstace = this;
+        }else{
+            Destroy(gameObject);
+            return; 
+        }
+    }
 
     //Called once at the start before the frame
     private void Start() {
@@ -25,9 +36,13 @@ public class Pillars : Interact
     /* Deals with opening the door, if it is closed, the door will be moved upwards */
     public override void DoInteract(){
         transform.position =  new Vector3(transform.position.x, transform.position.y-10f, transform.position.z);  //Move the button down
+        GetNewPillarPosition(53.1f);
+    }
 
-        //Location to move the pillars to and says that the pillars should move up
-        newLocation = new Vector3(pillars.transform.position.x, pillars.transform.position.y+53.1f, pillars.transform.position.z);
+    //Sets the position to which the pillars should move to
+    public void GetNewPillarPosition(float yMovement){
+        //Location to move the pillars to and says that the pillars should move up or down
+        newLocation = new Vector3(pillars.transform.position.x, pillars.transform.position.y + yMovement, pillars.transform.position.z);
         shouldRaise = true;
     }
 

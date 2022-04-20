@@ -42,7 +42,8 @@ public class MeleeWeapon : Weapon
 
         if(!hasCollided && isAttacking){
             FindShotType(collided.transform); //Finds what enemy was hit and deals dmg to it
-
+            
+            audioMng.PlaySound("EnemyHit", audioMng.sounds);
             //The weapon has collided and is no longer atacking
             hasCollided = true;
             isAttacking = false;

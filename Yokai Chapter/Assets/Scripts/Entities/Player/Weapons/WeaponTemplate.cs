@@ -13,4 +13,5 @@ public class WeaponTemplate : ScriptableObject
     public float bps = 1f; //Bullets per second
     public int ammo = 25; //The starting number of bullets
     public int ammoDropCount = 25; //The amount of bullets this weapons drop will contain
+    public bool unlocked = false; //If the weapon can be used
 }

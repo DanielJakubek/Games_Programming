@@ -15,5 +15,6 @@ MonoBehaviour:
   dmg: 1000
   range: 60
   bps: 2
-  ammo: 837
+  ammo: 829
   ammoDropCount: 25
+  unlocked: 1

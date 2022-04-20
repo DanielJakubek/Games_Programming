@@ -17,3 +17,4 @@ MonoBehaviour:
   bps: 3
   ammo: -1
   ammoDropCount: 25
+  unlocked: 1

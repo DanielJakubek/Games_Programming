@@ -13,4 +13,9 @@ public class BossEnemy : Entity
     private void Awake() {
         health = bossTemplate.health; 
     }
+
+    //When this object is destroyed called the event 
+    private void OnDestroy() {
+        EventManager.eventMngr.FirstBossDeath();
+    }
 }

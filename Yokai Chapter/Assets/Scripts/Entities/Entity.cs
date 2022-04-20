@@ -33,7 +33,7 @@ public class Entity : MonoBehaviour
         Deals with playing the particle when the
         entity is "killed"
     */
-    private void KillParticle(){
+    public void KillParticle(){
         GameObject temp = Instantiate(impactParticle, transform.position+Vector3.up, Quaternion.Euler(-90f, 0f, 0f));
         gameObject.transform.parent = temp.transform;
         Destroy(temp,2);
