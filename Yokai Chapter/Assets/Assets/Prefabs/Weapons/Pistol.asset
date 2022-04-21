@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16fdcafca1f0d74ab153185ba7ad539, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  dmg: 1000
+  dmg: 35
   range: 60
   bps: 2
-  ammo: 829
+  ammo: 24
   ammoDropCount: 25
   unlocked: 1

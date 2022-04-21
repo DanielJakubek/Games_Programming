@@ -15,16 +15,4 @@ public class Interact : MonoBehaviour
     public virtual void DoInteract(){
         //Do stuff
     }
-
-    //What is shown when the player hovers over an interactable item
-    public virtual void Hover(){
-        //Do stuff
-    }
-
-    //Clears when the player stops hovering over the interactable item
-    public virtual void ClearHover(){
-        //Do stuff
-    }
-
-    
 }

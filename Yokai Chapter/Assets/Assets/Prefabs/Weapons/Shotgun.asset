@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16fdcafca1f0d74ab153185ba7ad539, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  dmg: 75
+  dmg: 100
   range: 60
   bps: 1.25
-  ammo: 878
+  ammo: 0
+  ammoDropCount: 25
+  unlocked: 0

@@ -14,6 +14,14 @@ public class BossEnemy : Entity
         health = bossTemplate.health; 
     }
 
+    //called once at the start before the first frame
+    private void Start() {
+
+        //Scuffed way to do it, but works for now
+        AudioManager.mngInstance.DecreaseVolume("MusicStartArea", AudioManager.mngInstance.sounds);
+        AudioManager.mngInstance.PlaySound("MusicBossArea", AudioManager.mngInstance.sounds);
+    }
+
     //When this object is destroyed called the event 
     private void OnDestroy() {
         EventManager.eventMngr.FirstBossDeath();

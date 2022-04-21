@@ -3,6 +3,9 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine.SceneManagement;
 
+using System.Collections;
+using System.Collections.Generic;
+
 /* 
     References Barckeys video on "Introduction to AUDIO in Unity".
     https://www.youtube.com/watch?v=6OT43pvUyfY
@@ -18,12 +21,7 @@ public class AudioManager : MonoBehaviour
         //Makes sure there is a single audio manager
         if(mngInstance == null){
             mngInstance = this;
-        }else{
-            Destroy(gameObject);
-            return;
         }
-
-        DontDestroyOnLoad(gameObject);
 
         //Adds the different sound ref/groupings
         AddAudioSources(sounds);  
@@ -78,6 +76,21 @@ public class AudioManager : MonoBehaviour
             else{
                 Debug.Log("The sound: " +  soundName + " was not found");
                 return;
+            }
+        }
+    }
+
+    public IEnumerator DecreaseVolume(string soundName, Sounds[] soundArray){
+
+        if(soundName !=null && soundArray !=null){
+            Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
+            
+            if(foundSound != null){
+                while(foundSound.volume > 0){
+                    yield return new WaitForSeconds(1f);
+                    foundSound.volume -=1;
+
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ TagManager:
   - Explode
   - Trigger
   - MainCam
+  - Button
   layers:
   - Default
   - TransparentFX

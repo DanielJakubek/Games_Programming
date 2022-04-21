@@ -28,7 +28,6 @@ public class Player : Entity
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
 
