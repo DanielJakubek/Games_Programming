@@ -16,9 +16,22 @@ public class MenuParent : MonoBehaviour
         try{
             Time.timeScale = 1f; //Unpauses the game
             Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
+            StopAllSound();
             SceneManager.LoadScene(sceneName); 
         }catch(Exception e){
             Debug.Log(e);
         }
+    }
+
+
+    public void StopAllSound(){
+
+        //Adds each audio source in our array, including its volume properties
+        foreach(Sounds i in AudioManager.mngInstance.sounds){
+            
+            AudioManager.mngInstance.StopSound(i.name, AudioManager.mngInstance.sounds);
+            //Stop the sound
+        }
+
     }
 }

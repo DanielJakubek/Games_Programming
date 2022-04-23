@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject doorPlatform;
-
-    public WeaponTemplate pistol;
-    public WeaponTemplate shotgun;
+    public GameObject doorPlatform; //The platfrom that spawns from the final room
+    public WeaponTemplate pistol; //The pistol weapon template
+    public WeaponTemplate shotgun; //The shotgun weapon template
 
     // Start is called before the first frame update
     void Start(){
 
         SetAmmo();
-
         EventManager.eventMngr.firstBossDeath += FirstBossDeath;
         AudioManager.mngInstance.PlaySound("MusicStartArea", AudioManager.mngInstance.sounds);
     }
