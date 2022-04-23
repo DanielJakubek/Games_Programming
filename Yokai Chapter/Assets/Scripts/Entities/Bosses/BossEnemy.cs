@@ -18,12 +18,17 @@ public class BossEnemy : Entity
     private void Start() {
 
         //Scuffed way to do it, but works for now
-        AudioManager.mngInstance.DecreaseVolume("MusicStartArea", AudioManager.mngInstance.sounds);
+        AudioManager.mngInstance.StopSound("MusicStartArea", AudioManager.mngInstance.sounds);
         AudioManager.mngInstance.PlaySound("MusicBossArea", AudioManager.mngInstance.sounds);
     }
 
     //When this object is destroyed called the event 
     private void OnDestroy() {
+
+        AudioManager.mngInstance.PlaySound("MusicStartArea", AudioManager.mngInstance.sounds);
+        AudioManager.mngInstance.StopSound("MusicBossArea", AudioManager.mngInstance.sounds);
+
+        EventManager.eventMngr.CloseAllDoors(); //Opens all doors
         EventManager.eventMngr.FirstBossDeath();
     }
 }

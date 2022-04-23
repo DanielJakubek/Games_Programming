@@ -33,9 +33,6 @@ public class MenuController : MonoBehaviour
     }
 
     private void OnMouseEnter() {
-
-        Debug.Log("here");
-
         if(audioMng != null)
             audioMng.PlaySound("Hover", audioMng.sounds);
     }

@@ -47,9 +47,6 @@ public class AreaManager : MonoBehaviour
         if(other.tag == "Player" || other.tag == "Trigger"){
             if(!triggerOnce){
 
-                //close all doors and makes them un openable
-                //EventManager.eventMngr.CloseAllDoors();
-
                 try{
                     EventManager.eventMngr.CloseAllDoors();
                 }catch(Exception e){ Debug.Log(e); }
