@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using System;
 using UnityEngine.SceneManagement;
-
 using System.Collections;
-using System.Collections.Generic;
+
 
 /* 
     References Barckeys video on "Introduction to AUDIO in Unity".
@@ -14,6 +12,7 @@ public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds; //Ref to Sounds class (main sounds)
     public static AudioManager mngInstance; 
+    float oldVolume = 0f;
 
     // Start is called before the first frame update
     void Awake(){
@@ -27,6 +26,18 @@ public class AudioManager : MonoBehaviour
         AddAudioSources(sounds);  
     }
 
+    //Plays once at the start
+    private void Start(){
+        oldVolume = PlayerPrefs.GetFloat("Volume");
+
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+            PlaySound("MenuMusic", sounds);
+    }
+    
+    private void Update() {
+        if(oldVolume != PlayerPrefs.GetFloat("Volume"))
+            UpdateVolume(sounds); 
+    }
 
     //Initalises all the sources
     private void AddAudioSources(Sounds[] itArray){
@@ -37,16 +48,11 @@ public class AudioManager : MonoBehaviour
             i.source.clip = i.soundClip;   
             i.source.volume = i.volume;   
             i.source.loop = i.loop; 
+            i.startVolume = i.volume;
         }
     }
 
-    //Plays once at the start
-    private void Start(){
-
-        if(SceneManager.GetActiveScene().name == "MainMenu")
-            PlaySound("MenuMusic", sounds);
-    }
-
+    
     /* Finds the sound we want in the sounds array and then plays it. */
     public void PlaySound(string soundName, Sounds[] soundArray){
 
@@ -59,8 +65,7 @@ public class AudioManager : MonoBehaviour
             else{
                 Debug.Log("The sound: " +  soundName + " was not found");
                 return;
-            }
-            
+            } 
         }
     }
 
@@ -80,8 +85,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public IEnumerator DecreaseVolume(string soundName, Sounds[] soundArray){
+    ///<summary>
+    ///Deals with changing the volume. Does this by getting the new volume from
+    ///the player pref and then times the start volume of each volume by that
+    /// pref number and then nets the old volume to the new volume
+    ///</summary>
+    private void UpdateVolume(Sounds[] itArray){
 
+        float newVolume = PlayerPrefs.GetFloat("Volume");
+
+        //Changes the volume of all sources
+        foreach(Sounds i in itArray)
+            i.source.volume = i.startVolume * newVolume;   
+
+        oldVolume = newVolume;
+    }
+
+
+    ///<summary>
+    ///Decreases the volume by one every second
+    ///</summary>
+    public IEnumerator DecreaseVolume(string soundName, Sounds[] soundArray){
         if(soundName !=null && soundArray !=null){
             Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
             
@@ -89,7 +113,6 @@ public class AudioManager : MonoBehaviour
                 while(foundSound.volume > 0){
                     yield return new WaitForSeconds(1f);
                     foundSound.volume -=1;
-
                 }
             }
         }

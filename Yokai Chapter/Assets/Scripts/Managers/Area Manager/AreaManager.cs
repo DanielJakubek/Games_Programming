@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 /*
     Purpose of this class is to spawn an enemy
@@ -27,7 +28,11 @@ public class AreaManager : MonoBehaviour
                 //When last wave, make trigged false to no longer update
                 if(numberOfWaves < currentWave){
                     triggered = false;
-                    EventManager.eventMngr.CloseAllDoors();
+
+                    try{
+                        EventManager.eventMngr.CloseAllDoors();
+                    }catch(Exception e){ Debug.Log(e); }
+                   
                 }
             }
         }
@@ -43,7 +48,11 @@ public class AreaManager : MonoBehaviour
             if(!triggerOnce){
 
                 //close all doors and makes them un openable
-                EventManager.eventMngr.CloseAllDoors();
+                //EventManager.eventMngr.CloseAllDoors();
+
+                try{
+                    EventManager.eventMngr.CloseAllDoors();
+                }catch(Exception e){ Debug.Log(e); }
 
                 triggerOnce = true;
                 triggered = true;

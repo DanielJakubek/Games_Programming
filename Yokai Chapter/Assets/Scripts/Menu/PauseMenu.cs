@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
 
 ///<summary>
 /// This Class deals with enabling the disabling the pause menu
 ///</summary>
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MenuParent
 {
     private bool isPaused = false; // Is the game paused
-    public GameObject pausePanel; // The pause menu UI
 
-    [Header("Start")]
+    [Header("Buttons")]
     public Button restartBtn;
     public Button mainMenuBtn;
     public Button resumeBtn;
@@ -25,7 +21,10 @@ public class PauseMenu : MonoBehaviour
         
         //Restart
         Button restartButton = restartBtn.GetComponent<Button>();
-        restartButton.onClick.AddListener(() => { LoadScene("SampleScene"); });
+        restartButton.onClick.AddListener(() => { 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+            Time.timeScale = 1f; //Unpauses the game
+            });
 
         //Main Menu
         Button mainMenuButton = mainMenuBtn.GetComponent<Button>();
@@ -60,10 +59,10 @@ public class PauseMenu : MonoBehaviour
     /// and then locking  the curosr and disabling the pause menu panel
     ///</summary>
     private void Resume(){
-        if(pausePanel !=null){
+        if(panel !=null){
             Time.timeScale = 1f; //Unpauses the game
             Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
-            pausePanel.SetActive(false);
+            panel.SetActive(false);
         }
     }  
 
@@ -72,23 +71,10 @@ public class PauseMenu : MonoBehaviour
     /// and then unlocking the curosr and enabling the pause menu panel
     ///</summary>
     private void PauseGame(){
-        if(pausePanel !=null){
+        if(panel !=null){
             Time.timeScale = 0f; //Pauses the game
             Cursor.lockState = CursorLockMode.None; //Unlocks the cursor
-            pausePanel.SetActive(true);
-        }
-    }
-
-    ///<summary>
-    /// Tries to load the main menu scene
-    ///</summary>
-    private void LoadScene(string sceneName){
-        try{
-            Time.timeScale = 1f; //Unpauses the game
-            Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
-            SceneManager.LoadScene(sceneName); 
-        }catch(Exception e){
-            Debug.Log(e);
+            panel.SetActive(true);
         }
     }
 }

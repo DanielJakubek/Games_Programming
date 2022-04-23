@@ -15,14 +15,8 @@ public class Prototype : MonoBehaviour
     private void Awake(){
 
         //Makes sure there is a single audio prototype
-        if(prototypeInstance == null){
+        if(prototypeInstance == null)
             prototypeInstance = this;
-        }else{
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);  
     }
 
     /*

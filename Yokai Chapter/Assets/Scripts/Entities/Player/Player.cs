@@ -30,7 +30,6 @@ public class Player : Entity
         }
     }
 
-
     //Start is called before the first frame update
     private void Start() {
 
@@ -85,7 +84,10 @@ public class Player : Entity
             waitDamageUI += 5f;
             bloodSplatterUI.SetActive(true);
         }
-           
+
+        if(health <= 0)
+            EventManager.eventMngr.PlayerDeath();
+
         //Play sound upon taking damage
         AudioManager.mngInstance.PlaySound("GotHit", AudioManager.mngInstance.sounds);
     }

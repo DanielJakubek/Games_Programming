@@ -15,6 +15,7 @@ public class Sounds
 
     [Range(0f,1f)]
     public float volume; //The volume of a sound clip
+    public float startVolume; //The default starting volume
     [Range(0f,1f)]
     public float spatialBlend = 1;
     public bool loop;

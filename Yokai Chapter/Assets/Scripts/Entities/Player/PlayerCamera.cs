@@ -36,6 +36,8 @@ public class PlayerCamera : MonoBehaviour
         //Subscribes functions to events
         EventManager.eventMngr.startCameraShake += ShakeOn;
         EventManager.eventMngr.stopCameraShake += ShakeOff;
+
+        mouseSen = PlayerPrefs.GetFloat("MouseSen");
     }
 
     // Update is called once per frame

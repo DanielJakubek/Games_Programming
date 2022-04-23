@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 /*
     Shows an error with UI not existing in the namespace, however, it seems
@@ -27,7 +28,13 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsMenu;
     public Button settingsBackBtn;
 
+    [Header("Mouse Settings")]
+    public Slider mouseSlider;
+    public TextMeshProUGUI mouseValue;
 
+    [Header("Volume Settings")]
+    public Slider volumeSlider;
+    public TextMeshProUGUI volumeValue;
 
     /*  Start is called before the first frame update
 
@@ -37,6 +44,7 @@ public class MainMenu : MonoBehaviour
     private void Start(){
 
         AudioManager.mngInstance.PlaySound("MenuMusic", AudioManager.mngInstance.sounds);
+        Cursor.lockState = CursorLockMode.None; //Locks the cursor and makes it invisible.
 
         //=====Add listeners for buttons=====//
         //============================================================================================
@@ -75,6 +83,39 @@ public class MainMenu : MonoBehaviour
         settingBackButton.onClick.AddListener(() => { SwitchMenus(settingsMenu, mainMenu);});
     }
 
+    //Called once every frame
+    private void Update() {
+        UpdateMouseSen();
+        UpdateVolume();
+    }
+
+    ///<summary>
+    ///Deals with changing the mouse sen. It does this by making sure the value cannot be
+    ///less than 0.5f and then sets the display to show current value and saves that value
+    ///in PlayerPref that is used later.
+    ///</summary>
+    private void UpdateMouseSen(){
+        if(mouseSlider !=null){
+
+            if(mouseSlider.value < 0.5f)
+                mouseSlider.value = 500f;
+            
+            mouseValue.text = mouseSlider.value.ToString("F2");
+            PlayerPrefs.SetFloat("MouseSen", mouseSlider.value);
+        }
+    }
+
+    ///<summary>
+    ///Deals with changing the mouse sen. It does this by making sure the value cannot be
+    ///less than 0.5f and then sets the display to show current value and saves that value
+    ///in PlayerPref that is used later.
+    ///</summary>
+    private void UpdateVolume(){
+        if(volumeSlider !=null){
+            volumeValue.text = volumeSlider.value.ToString("F2");
+            PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+        }
+    }
 
     /* 
         Deals with loading the level

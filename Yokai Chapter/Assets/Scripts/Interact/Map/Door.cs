@@ -17,15 +17,14 @@ public class Door : Interact
         description = "Press 'E' To Open";
 
         EventManager.eventMngr.closeDoors += CloseDoor; //Subs function to event
-
     }
 
     /* Closes the door and makes it so it cannot be opened */
     public void CloseDoor(){
         canOpen = !canOpen;
-
-        if(isOpen)   
-            transform.position = new Vector3(transform.position.x, transform.position.y-4, transform.position.z);
+        
+        if(isOpen)
+            transform.position = new Vector3(transform.position.x, transform.position.y-4, transform.position.z);         
     }
 
     /* Deals with opening the door, if it is closed, the door will be moved upwards */
@@ -52,7 +51,6 @@ public class Door : Interact
     private void OnMouseExit() {
         descriptionText.text = "".ToString();
     }
-
 
     //Unsubscribe from event upon destruction
     private void OnDestroy() {

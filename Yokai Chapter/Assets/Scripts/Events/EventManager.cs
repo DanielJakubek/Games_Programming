@@ -12,14 +12,8 @@ public class EventManager : MonoBehaviour
     private void Awake(){
         
         //Makes sure there is a single event manager
-        if(eventMngr == null){
+        if(eventMngr == null)
             eventMngr = this;
-        }else{
-            Destroy(gameObject);
-            return; 
-        }
-
-        DontDestroyOnLoad(gameObject); 
     }
 
 
@@ -100,4 +94,16 @@ public class EventManager : MonoBehaviour
         if(firstBossDeath != null)
             firstBossDeath();
     } 
+
+    public event Action playerDeath; //Event to start whatever the player dies
+    public void PlayerDeath(){
+        if(playerDeath != null)
+            playerDeath();
+    } 
+
+    public event Action levelComplete; //Event to start whatever the player completes a level
+    public void LevelComplete(){
+        if(levelComplete != null)
+            levelComplete();
+    }  
 }

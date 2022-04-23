@@ -13,14 +13,8 @@ public class EnemyCounter : MonoBehaviour{
     void Awake(){
 
         //Makes sure there is a single audio manager
-        if(enmyCounterInstace == null){
+        if(enmyCounterInstace == null)
             enmyCounterInstace = this;
-        }else{
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     //Setter

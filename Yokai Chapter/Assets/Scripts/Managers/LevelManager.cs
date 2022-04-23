@@ -38,8 +38,8 @@ public class LevelManager : MonoBehaviour
     ///</summary>
     private void SetAmmo(){
         if(pistol != null && shotgun != null){
-            pistol.ammo = 0;
-            shotgun.ammo = 0;
+            pistol.ammo = 25;
+            shotgun.ammo = 25;
         }
     }
 }
