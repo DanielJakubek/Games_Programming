@@ -37,23 +37,8 @@ public class Door : Interact
         isOpen = !isOpen;
     }
 
-    //What is shown when the player hovers over an interactable item
-    private void OnMouseOver() {
-
-        //Only displays when player is within range
-        if(Vector3.Distance(Player.playerInstance.transform.position, transform.position) <= 7f)
-            descriptionText.text = description.ToString();
-        else
-            OnMouseExit();
-    }
-
-    //What is shown when the player hovers over an interactable item
-    private void OnMouseExit() {
-        descriptionText.text = "".ToString();
-    }
-
     //Unsubscribe from event upon destruction
     private void OnDestroy() {
-        EventManager.eventMngr.closeDoors -= DoInteract; //Subs function to event
+        EventManager.eventMngr.closeDoors -= CloseDoor; //un-Subs function to event
     }
 }

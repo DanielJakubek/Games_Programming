@@ -34,6 +34,8 @@ public class CompleteMenu : MenuParent
         startTime = Time.time; //What time the level started at
         AddButtonListeners();
 
+        StartLootLockerSession();
+  
         //Subscribes the function to the event
         EventManager.eventMngr.levelComplete += ShowCompleteMenu;
     }
@@ -95,6 +97,18 @@ public class CompleteMenu : MenuParent
     ////////////////LEADERBOARD////////////////////
 
     ///<summary>
+    ///Starts the loot locker session
+    ///</summary>
+    public void StartLootLockerSession(){
+        LootLockerSDKManager.StartGuestSession("Player", (response) => {
+            if(response.success)
+                Debug.Log("Connected to LootLocker");
+            else
+                Debug.Log("Did not connect to LootLocker");
+        });
+    }
+
+    ///<summary>
     ///Submits the player's name and time to the loot locker leaderboard
     ///</summary>
     public void SubmitTime(){
@@ -109,7 +123,7 @@ public class CompleteMenu : MenuParent
     ///it will check if there are leaderboard text fields and then loop through x items from the leaderboard adding each 
     // to the text field
     ///</summary>
-    private void DisplayLeaderBoard(){
+    public void DisplayLeaderBoard(){
         LootLockerSDKManager.GetScoreList(boardID, MaxTimes, (response) =>{
             if(response.success){
                 if(leaderboardName !=null && leaderBoardTime !=null){

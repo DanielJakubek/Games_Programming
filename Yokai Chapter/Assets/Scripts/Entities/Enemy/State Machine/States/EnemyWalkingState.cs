@@ -53,12 +53,9 @@ public class EnemyWalkingState : EnemyState
         //Distance between the enemy and target
         float distanceBetweenEntities = getDistanceBetween();
 
-        //Need to update each frame otherwise it does not want to change
-        //agent.speed = enemyTemplate.speed;
-
         if(distanceBetweenEntities <= enemyTemplate.fleeDistance){
-             context.SwitchStates(context.fleeState);
-             return;
+            context.SwitchStates(context.fleeState);
+            return;
         }
 
         //Go to attacking state when in attack range
@@ -73,7 +70,7 @@ public class EnemyWalkingState : EnemyState
 
         //Once agroed, always agroed
         if(isAgro){
-            agent.speed = enemyTemplate.speed;
+            agent.speed = enemyTemplate.speed; //Need to update each frame otherwise it does not want to change
             CheckMovement();
         }
     }
@@ -88,7 +85,7 @@ public class EnemyWalkingState : EnemyState
     private void CheckMovement(){
 
         //position has changed
-        if(currnetLocation != target.transform.position){
+       // if(currnetLocation.x != target.transform.position.x && currnetLocation.z != target.transform.position.z){
             
             //Stops the enemy from sliding about
             agent.velocity =  target.transform.position - itSelf.transform.position;
@@ -97,9 +94,12 @@ public class EnemyWalkingState : EnemyState
             //Stop current on currnet tracks
             currnetLocation = target.transform.position;
 
+            var temp1 = new Vector3(currnetLocation.x, 0f, currnetLocation.z);
+
             //Moves the enemy towards the player
             agent.SetDestination(currnetLocation);
-        }
+        //}
+
 
         if(enemyTemplate.name =="Okubi")
             OkubiMotion();

@@ -106,4 +106,22 @@ public class EventManager : MonoBehaviour
         if(levelComplete != null)
             levelComplete();
     }  
+
+    public event Action<int, int> leverPuzzle; //Event that deals with setting up the combination puzzle
+    public void LeverPuzzle(int puzzleNumber, int newInput){
+        if(leverPuzzle != null)
+            leverPuzzle(puzzleNumber, newInput);
+    } 
+
+    public event Action<int, int> lockPuzzle; //Event that deals with locking the lever after completing the puzzle
+    public void LockPuzzle(int puzzleNumber, int newInput){
+        if(lockPuzzle != null)
+            lockPuzzle(puzzleNumber, newInput);
+    }
+
+    public event Action<int, int ,bool> puzzleReset; //Event that deals with playing the reset aniamtion for the puzzle levers
+    public void PuzzleReset(int puzzleNumber, int leverNumber, bool animationState){
+        if(puzzleReset != null)
+            puzzleReset(puzzleNumber, leverNumber, animationState);
+    }
 }

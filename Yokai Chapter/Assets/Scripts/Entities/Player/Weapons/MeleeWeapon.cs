@@ -10,7 +10,7 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
     //Variables to make sure the collison occurs once and only when attacking
-    private bool hasCollided = false;
+    // private bool hasCollided = false;
     private bool isAttacking = false;
 
     //Update is called once per frame
@@ -28,8 +28,6 @@ public class MeleeWeapon : Weapon
         //Plays the sound assocciated with the attack
         weaponVFX();
 
-        //Variables that make sure the collision doesn't happen all the time.
-        hasCollided = false;
         isAttacking = true;
     }
 
@@ -38,16 +36,20 @@ public class MeleeWeapon : Weapon
         something with a collider. If that item has the tag of enemy then it
         is deemed to be an enemy, and will apply this weapon's damage upon it. 
     */
-    private void OnCollisionEnter(Collision collided) {
+    private void OnTriggerEnter(Collider other) {
 
-        if(!hasCollided && isAttacking){
-            FindShotType(collided.transform); //Finds what enemy was hit and deals dmg to it
+       
+        if(isAttacking){
+            FindShotType(other.transform); //Finds what enemy was hit and deals dmg to it
             
-            audioMng.PlaySound("EnemyHit", audioMng.sounds);
-            //The weapon has collided and is no longer atacking
-            hasCollided = true;
+            if(other.transform.tag == "Enemy")
+                audioMng.PlaySound("EnemyHit", audioMng.sounds);
+
+            Debug.Log("attacking");
+
+            //No longer atacking
             isAttacking = false;
-        }
+       }       
     }
 
     /*

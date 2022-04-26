@@ -13,6 +13,8 @@ public class AreaManager : MonoBehaviour
     public string areaName; //What area the spawner is responsilbe for
     public int spawnNextAfter = 0; //How many enemies remaning before next wave should spawn
     private bool triggered,triggerOnce = false;  //The trigger area
+
+    public bool closeDoors = true;
     
     // Update is called once per frame
     void Update()
@@ -29,10 +31,11 @@ public class AreaManager : MonoBehaviour
                 if(numberOfWaves < currentWave){
                     triggered = false;
 
-                    try{
-                        EventManager.eventMngr.CloseAllDoors();
-                    }catch(Exception e){ Debug.Log(e); }
-                   
+                    if(closeDoors){
+                        try{
+                            EventManager.eventMngr.CloseAllDoors();
+                        }catch(Exception e){ Debug.Log(e); }
+                    }
                 }
             }
         }
@@ -47,9 +50,11 @@ public class AreaManager : MonoBehaviour
         if(other.tag == "Player" || other.tag == "Trigger"){
             if(!triggerOnce){
 
-                try{
-                    EventManager.eventMngr.CloseAllDoors();
-                }catch(Exception e){ Debug.Log(e); }
+                if(closeDoors){
+                    try{
+                        EventManager.eventMngr.CloseAllDoors();
+                    }catch(Exception e){ Debug.Log(e); }
+                }
 
                 triggerOnce = true;
                 triggered = true;

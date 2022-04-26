@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Grog
   health: 50
   range: 2
-  bps: 2
+  bps: 1
   damage: 75
   speed: 45
   agroDistance: 150
