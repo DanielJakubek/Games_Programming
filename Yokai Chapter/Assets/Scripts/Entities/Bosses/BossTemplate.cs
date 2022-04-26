@@ -16,4 +16,5 @@ public class BossTemplate : ScriptableObject
     public float damageTwo = 25f; //The dmg the enemy deals
 
     public float speed = 20f; //The speed of the enemy
+    public float range = 3f; 
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 /*  
     The state machine is inspired by this video: 
@@ -10,30 +11,37 @@ public class BossContext : MonoBehaviour
     [Header("All the possible states")]
     public BossState currentState; //Current state
     public BossIdleState idleState; //Idle state
-    public BossAttackState attackState; //Attack state
+    public BossWalkState bossWalkState; //Walking state
+    
     public BossRestState bossRestState; //Rest state
+
+    public BossOneAttackState bossOneAttackState;
+    public BossTwoAttackState bossTwoAttackState;
+
 
     [Header("Enemy properties")]
     public GameObject target; //The target's gameobject
     public Animator enemyAnimator; //The animator used to animate the enemy
 
     public BossTemplate bossTemplate; //Scriptable object containing enemy details
-
-    //public EnemyTemplate enemyTemplate; //Scriptable object containing enemy details
     public BossWeapons bossWeapons; //Struct holding the weapons of this boss
 
-  
-    //Called once before the start method
-    private void Awake() {
+    public NavMeshAgent agent;
+
+    // Start is called before the first frame update
+    private void Start(){
+
         target = Player.playerInstance.gameObject; //Gets player game object to follow
 
         idleState = new BossIdleState(bossTemplate, enemyAnimator); //Sets up the idle state
         bossRestState = new BossRestState(bossTemplate, enemyAnimator); //Sets up the test state
-        attackState = new BossAttackState(bossTemplate, target, gameObject, enemyAnimator, bossWeapons); //Sets up the attack state
-    }
-        
-    // Start is called before the first frame update
-    private void Start(){
+
+        // public BossWalkState(BossTemplate bossTemplate, GameObject target, GameObject itSelf, Animator enemyAnimator, NavMeshAgent agent){
+        bossWalkState = new BossWalkState(bossTemplate, target, gameObject, enemyAnimator, agent);
+
+        bossOneAttackState = new BossOneAttackState(bossTemplate, target, gameObject, enemyAnimator, bossWeapons); //Sets up the attack state
+        bossTwoAttackState = new BossTwoAttackState(bossTemplate, target, gameObject, enemyAnimator, bossWeapons.weaponOne); //Sets up the attack state
+
         currentState = idleState;
         currentState.StartState(this);
     }
@@ -65,13 +73,37 @@ public class BossContext : MonoBehaviour
         dmg, the number of damage the target will take
     */
     public void InstantiateObject(GameObject prefab, GameObject origin, float dmg){
-        Instantiate(prefab, origin.transform.position, origin.transform.rotation).GetComponent<Fireball>().SetDmg(dmg);
+        if(dmg > 0)
+            Instantiate(prefab, origin.transform.position, origin.transform.rotation).GetComponent<Fireball>().SetDmg(dmg);
+        else{
+            var temp = Instantiate(prefab, origin.transform.position, origin.transform.rotation);
+            Destroy(temp, 15f);
+        }
+    }
+
+    ///<summary>
+    ///Gets the current health of this enemy
+    ///<summary>
+    public float GetHealth(){
+        return bossTemplate.health;
+    }
+
+    
+    /// <summary>
+    /// Used to get the distance between the target and this object
+    /// </summary>
+    public virtual float getDistanceBetween(){
+        //Gets the vector 3 of the target adn then gets the distance between the target and itself
+        Vector3 moveLocation = target.transform.position;
+        return Vector3.Distance(gameObject.transform.position, target.transform.position);
     }
 
     //Stops loops sounds from this entity
     private void OnDestroy() {
         AudioManager.mngInstance.StopSound("Beam", AudioManager.mngInstance.sounds); //Stop sound
     }
+
+    public virtual void SwitchToWalk(){}
 
 }
 /* Struct holding gameobject of Boss's weapons */

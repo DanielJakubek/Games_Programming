@@ -33,6 +33,6 @@ public class BossRestState : BossState
     //Waits for x seconds before switching states
     IEnumerator WaitFewSeconds(BossContext context){
         yield return new WaitForSeconds(bossTemplate.restLength); //Wait for x seconds
-        context.SwitchStates(context.attackState);
+        context.SwitchStates(context.bossOneAttackState);
     }
 }

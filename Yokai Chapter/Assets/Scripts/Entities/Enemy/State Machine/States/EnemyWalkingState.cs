@@ -93,9 +93,7 @@ public class EnemyWalkingState : EnemyState
 
             //Stop current on currnet tracks
             currnetLocation = target.transform.position;
-
-            var temp1 = new Vector3(currnetLocation.x, 0f, currnetLocation.z);
-
+            
             //Moves the enemy towards the player
             agent.SetDestination(currnetLocation);
         //}

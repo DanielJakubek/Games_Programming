@@ -1,20 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /*  
     Deals with the attacks of the boss. This is the
     beam attack and fireball attack
 */
-public class BossAttackState : BossState
+public class BossOneAttackState : BossAttackState
 {
     public BossWeapons bossWeapons; //The weapons of this boss
     private float waitTimeFireBall, waitTimeBeam; //How long to wait before next attack
     private int ballCount; //Counts how many fireballs have been shot
     private float rotation; //How much the object should rotate
 
-     private bool resetRotation = true;
+    private bool resetRotation = true;
 
     //Constructor Paramters: The ones under "Enemy Properties" above this method
-    public BossAttackState(BossTemplate bossTemplate, GameObject target, GameObject itSelf, Animator enemyAnimator, BossWeapons bossWeapons){
+    public BossOneAttackState(BossTemplate bossTemplate, GameObject target, GameObject itSelf, Animator enemyAnimator, BossWeapons bossWeapons){
         this.bossTemplate = bossTemplate;
         this.target = target;
         this.itSelf = itSelf;
@@ -102,7 +104,6 @@ public class BossAttackState : BossState
         }
     }
 
-   
     /*
         Deals with rotating the boss while it beams the
         player. After the boss has rotated enough it will
@@ -121,7 +122,6 @@ public class BossAttackState : BossState
         //Switches to the rest phase after the rotation has finished
         if(rotation <= 0){
            
-
             bossWeapons.weaponThree.SetActive(false);
             AudioManager.mngInstance.StopSound("Beam", AudioManager.mngInstance.sounds); //Stop sound
              
@@ -167,19 +167,5 @@ public class BossAttackState : BossState
                 context.InstantiateObject(bossWeapons.Fireball, bossWeapons.weaponTwo, bossTemplate.damageOne);
             }  
         }
-    }
-
-    /*  
-        It rotates the enemy to face the target (locking the y rotation). 
-        Parameter: playerPosition, vector3 that sends the information  where to rotate towards
-    */
-    private void FaceTarget(){
-        
-        var lookPosition = target.transform.position;
-
-        //Rotates the enemy to face the player/object it is tracking
-        Vector3 rotationLocation = new Vector3(lookPosition.x, 0f, lookPosition.z);
-        itSelf.transform.LookAt(lookPosition);
-  
     }
 }

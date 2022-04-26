@@ -64,13 +64,11 @@ public class MainMenu : MonoBehaviour
 
         //Start Menu 
         Button loadLevelOneBtn = levelOne.GetComponent<Button>();
-        loadLevelOneBtn.onClick.AddListener(LoadLevelOne);
-
+        loadLevelOneBtn.onClick.AddListener(() => { LoadLevelOne("Level1") ;});
+            
         Button loadLevelTwoBtn = levelTwo.GetComponent<Button>();
-        loadLevelTwoBtn.onClick.AddListener(LoadLevelOne);
+        loadLevelTwoBtn.onClick.AddListener(() => { LoadLevelOne("Level2") ;});
 
-        Button loadLevelThreeBtn = levelThree.GetComponent<Button>();
-        loadLevelThreeBtn.onClick.AddListener(LoadLevelOne);
 
         //Back Button
         Button startBackButton = startBackBtn.GetComponent<Button>();
@@ -120,10 +118,10 @@ public class MainMenu : MonoBehaviour
     /* 
         Deals with loading the level
     */
-    private void LoadLevelOne(){
+    private void LoadLevelOne(string level){
         Time.timeScale = 1f; //Unpauses the game
         Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
-        SceneManager.LoadScene("SampleScene"); 
+        SceneManager.LoadScene(level); 
     }
 
     /*

@@ -20,7 +20,9 @@ public class LevelManager : MonoBehaviour
     ///Deals with what happens when the first boss dies in level one
     ///</summary>
     public void FirstBossDeath(){
-        Pillars.pillarInstace.GetNewPillarPosition(-20f);
+
+        if(Pillars.pillarInstace !=null)
+            Pillars.pillarInstace.GetNewPillarPosition(-20f);
     
         if(doorPlatform != null)
             doorPlatform.SetActive(true);

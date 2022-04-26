@@ -124,4 +124,21 @@ public class EventManager : MonoBehaviour
         if(puzzleReset != null)
             puzzleReset(puzzleNumber, leverNumber, animationState);
     }
+
+    public event Action<float> speedDebuff; //Event that deals with changing the player's speed
+    public void SpeedDebuff(float debuff){
+        if(speedDebuff != null)
+            speedDebuff(debuff);
+    }
+
+    public event Action speedIncrease; //Event that deals with changing the player's speed back to normal
+    public void SpeedIncrease(){
+        if(speedIncrease != null)
+            speedIncrease();
+    }
+
+
+
+
+    
 }

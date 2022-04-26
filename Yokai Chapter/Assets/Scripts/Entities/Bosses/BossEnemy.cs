@@ -16,14 +16,21 @@ public class BossEnemy : Entity
 
     //called once at the start before the first frame
     private void Start() {
-
         //Scuffed way to do it, but works for now
         AudioManager.mngInstance.StopSound("MusicStartArea", AudioManager.mngInstance.sounds);
         AudioManager.mngInstance.PlaySound("MusicBossArea", AudioManager.mngInstance.sounds);
+
+       // EventManager.eventMngr.LevelComplete();
     }
+
+
 
     //When this object is destroyed called the event 
     private void OnDestroy() {
+
+        if(gameObject.name == "BossTwo(Clone)"){
+            EventManager.eventMngr.LevelComplete();
+        }
 
         AudioManager.mngInstance.PlaySound("MusicStartArea", AudioManager.mngInstance.sounds);
         AudioManager.mngInstance.StopSound("MusicBossArea", AudioManager.mngInstance.sounds);

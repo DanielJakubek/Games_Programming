@@ -10392,6 +10392,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5064030527364917216, guid: 21e67cab2bfc0e04f9bf906e22e13319, type: 3}
+      propertyPath: nextLevel
+      value: Level2
+      objectReference: {fileID: 0}
     - target: {fileID: 5264968963259299635, guid: 21e67cab2bfc0e04f9bf906e22e13319, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10741,11 +10745,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2891912741314709022, guid: fe110960095267e4f85582e442a93b3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8
+      value: 3.32
       objectReference: {fileID: 0}
     - target: {fileID: 2891912741314709022, guid: fe110960095267e4f85582e442a93b3b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 85.12
+      value: 81.98
       objectReference: {fileID: 0}
     - target: {fileID: 2891912741314709022, guid: fe110960095267e4f85582e442a93b3b, type: 3}
       propertyPath: m_LocalRotation.w

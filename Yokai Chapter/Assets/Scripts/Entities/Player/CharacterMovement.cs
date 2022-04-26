@@ -35,8 +35,6 @@ public class CharacterMovement : MonoBehaviour{
     void Awake() {
         Cursor.lockState = CursorLockMode.Locked; //Locks the cursor and makes it invisible.
 
-        
-
         chrController = GetComponent<CharacterController>(); //Gets the character controller
         gravityTemp = GetComponent<Gravity>(); //Gets the gravity script
         startingPosition = playerCam.transform.localPosition.y;
@@ -44,6 +42,8 @@ public class CharacterMovement : MonoBehaviour{
 
     private void Start() {
         audioMng = AudioManager.mngInstance;
+        EventManager.eventMngr.speedDebuff += MovementDecrease;
+        EventManager.eventMngr.speedIncrease += MovementIncrease;
     }
 
 
@@ -118,5 +118,40 @@ public class CharacterMovement : MonoBehaviour{
             //Generates a random number to choose a random foot step sound to play.
             audioMng.PlaySound("Step"+Random.Range(0, 3), audioMng.sounds);
         }
+    }
+
+    ///<summary>
+    ///Changes the speed of the player
+    ///</summary>
+    public void MovementDecrease(float debuff){
+
+        if(!savedVelocities){
+            oldWalkVelocity = walkVelocity;
+            oldRunningVelocity = sprintVelocity;
+            savedVelocities= true;
+        }
+
+        if(debuff <= 1 || debuff > 0 && savedVelocities){
+            walkVelocity *= debuff; // Walking speed
+            sprintVelocity *= debuff; // Sprinting speed
+        }     
+    }
+
+    private float oldWalkVelocity;
+    private float oldRunningVelocity;
+    bool savedVelocities = false;
+
+    ///<summary>
+    ///Changes the speed of the player
+    ///</summary>
+    public void MovementIncrease(){
+        walkVelocity = oldWalkVelocity; // Walking speed
+        sprintVelocity = oldRunningVelocity; // Sprinting speed
+          
+    }
+
+    private void OnDestroy() {
+        EventManager.eventMngr.speedDebuff -= MovementDecrease;
+        EventManager.eventMngr.speedIncrease -= MovementIncrease;
     }
 }

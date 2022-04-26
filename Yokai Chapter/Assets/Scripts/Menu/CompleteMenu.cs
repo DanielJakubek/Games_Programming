@@ -12,6 +12,8 @@ public class CompleteMenu : MenuParent
     public Button nexLevelBtn;
     public Button quitBtn;
 
+    public string nextLevel;
+
     //https://www.youtube.com/watch?v=pp8Vl4cKLdc
     [Header("Leaderboard")]
     public int boardID;
@@ -51,7 +53,7 @@ public class CompleteMenu : MenuParent
 
         //Next Level
         Button nextLevelButton = nexLevelBtn.GetComponent<Button>();
-        nextLevelButton.onClick.AddListener(() => { LoadScene("SampleScene"); }); //Change to level name
+        nextLevelButton.onClick.AddListener(() => { LoadScene(nextLevel); }); //Change to level name
 
         // Exit App
         Button quitButton = quitBtn.GetComponent<Button>();
@@ -91,8 +93,6 @@ public class CompleteMenu : MenuParent
             timeValue.text = finalTime.ToString();
         }   
     }
-
-
 
     ////////////////LEADERBOARD////////////////////
 

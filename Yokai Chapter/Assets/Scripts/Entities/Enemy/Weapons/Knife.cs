@@ -9,6 +9,7 @@ using UnityEngine;
 public class Knife : MonoBehaviour
 {   
     private float waitTime; //How long it has been between firing
+    public float damage = 10f;
     
     /*
         When the knife hits the player, deal damage to it. 
@@ -21,7 +22,7 @@ public class Knife : MonoBehaviour
 
         if(collider.transform.tag == "Player" && Time.time > waitTime){
             waitTime = Time.time + 1f/2f;
-            Player.playerInstance.UpdateHealth(10f);
+            Player.playerInstance.UpdateHealth(damage);
         }
     }
 }
