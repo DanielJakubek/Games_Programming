@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
     public Button startBackBtn;
     public Button levelOne;
     public Button levelTwo;
-    public Button levelThree;
+    public Button tutorial;
 
 
     [Header("Main Menu")]
@@ -69,6 +69,8 @@ public class MainMenu : MonoBehaviour
         Button loadLevelTwoBtn = levelTwo.GetComponent<Button>();
         loadLevelTwoBtn.onClick.AddListener(() => { LoadLevelOne("Level2") ;});
 
+        Button tutorialButton = tutorial.GetComponent<Button>();
+        tutorialButton.onClick.AddListener(() => { LoadLevelOne("Tutorial") ;});
 
         //Back Button
         Button startBackButton = startBackBtn.GetComponent<Button>();

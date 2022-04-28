@@ -30,8 +30,11 @@ public class AudioManager : MonoBehaviour
     private void Start(){
         oldVolume = PlayerPrefs.GetFloat("Volume");
 
-        if(SceneManager.GetActiveScene().name == "MainMenu")
-            PlaySound("MenuMusic", sounds);
+        if(SceneManager.GetActiveScene().name == "MainMenu"){
+            
+            PlaySound("MusicMenu", sounds);
+            Debug.Log("ASDASDASDASDASDASDLASJDASDASDASDASD");
+        }
     }
     
     private void Update() {
