@@ -1,7 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
+
+///<summary>
+///Scriptable object to keep boss information
+///<summary>
 [CreateAssetMenu(fileName = "New Boss")]
 public class BossTemplate : ScriptableObject
 {   

@@ -15,7 +15,6 @@ public class Gravity : MonoBehaviour
     public LayerMask fallFromMask; 
     private bool canFall;
 
-    private int jumpCounter = 0; //Counts how many times the player jumped
     private bool grounded; //Checks if the player is grounded or not.
     private Vector3 gravityStore; // Used to store the gravity vectors.
     private CharacterController chrController; // The character controller

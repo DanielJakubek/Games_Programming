@@ -114,7 +114,13 @@ public class CompleteMenu : MenuParent
     public void SubmitTime(){
         //The completion time in ints. This is bad because we're dealing with time and therefore this is not going to be precise but loot locker doesn't like floats here
         int playerTimeInt = (int)finalTime; 
-        LootLockerSDKManager.SubmitScore(playerName.text, playerTimeInt, boardID, (response) =>{});
+
+        LootLockerSDKManager.SubmitScore(playerName.text, playerTimeInt, boardID, (response) =>{
+            if(response.success)
+                Debug.Log("Connected to LootLocker");
+            else
+                Debug.Log("Did not connect to LootLocker");
+        });
         DisplayLeaderBoard();
     }
 

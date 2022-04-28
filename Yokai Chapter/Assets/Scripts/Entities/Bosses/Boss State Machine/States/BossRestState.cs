@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/*
-    Deals with having the boss be
-    on the rest animation/state where they 
-    do nothing for x seconds
-*/
+
+///<summary>
+///Deals with having the boss be on the rest animation/state where they  do nothing for x seconds
+///</summary>
 public class BossRestState : BossState
 {
     //Constructor Paramters: The ones under "Enemy Properties" above this method

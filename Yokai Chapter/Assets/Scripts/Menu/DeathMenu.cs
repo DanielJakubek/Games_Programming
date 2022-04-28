@@ -1,25 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 using UnityEngine.SceneManagement;
 
-
+///<summary>
+/// The menu that is shown upon player death
+///</summary>
 public class DeathMenu : MenuParent
 {
-
     [Header("Buttons")]
     public Button restartBtn;
     public Button mainMenuBtn;
     public Button quitBtn;
 
-  
-    private void Start() {
     
-        //=====Add listeners for buttons=====//
+    private void Start() {
+        AssignButtons();
+        EventManager.eventMngr.playerDeath += deathScreen;
+    }
 
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    ///<summary>
+    /// Assigns listeners to each button on the panel
+    ///</summary>
+    private void AssignButtons(){
+         //=====Add listeners for buttons=====//
 
         //Restart
         Button restartButton = restartBtn.GetComponent<Button>();
@@ -35,8 +39,6 @@ public class DeathMenu : MenuParent
         // Exit App
         Button quitButton = quitBtn.GetComponent<Button>();
         quitButton.onClick.AddListener(() => { EventManager.eventMngr.CloseGame(); });
-
-        EventManager.eventMngr.playerDeath += deathScreen;
     }
 
     ///<summary>
@@ -50,8 +52,6 @@ public class DeathMenu : MenuParent
             Cursor.lockState = CursorLockMode.None; //Unlocks the cursor
         } 
     }
-
-
 
     private void OnDestroy() {
         EventManager.eventMngr.playerDeath -= deathScreen;

@@ -1,9 +1,9 @@
 using UnityEngine;
 
-/*  
-    The purpose of this class is to play various enemy sounds but most
-    importantly to keep track of enemy properties such as their health
-*/
+
+///<summary>
+///The purpose of this class is to play various enemy sounds but most  importantly to keep track of enemy properties such as their health
+///<summary>
 public class BossEnemy : Entity
 {   
     [Header("Enemy stats")]

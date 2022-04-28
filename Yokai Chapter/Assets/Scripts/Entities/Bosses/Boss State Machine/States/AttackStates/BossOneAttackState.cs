@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/*  
-    Deals with the attacks of the boss. This is the
-    beam attack and fireball attack
-*/
+///<summary>
+/// Deals with the attacks of the boss. This is the beam attack and fireball attack
+///</summary>
 public class BossOneAttackState : BossAttackState
 {
     public BossWeapons bossWeapons; //The weapons of this boss
@@ -33,7 +30,6 @@ public class BossOneAttackState : BossAttackState
             enemyAnimator.SetInteger("Transition", 1);
     }
             
-
     // Update is called once per frame
     public override void UpdateState(BossContext context){
 
@@ -47,15 +43,12 @@ public class BossOneAttackState : BossAttackState
             FireBallAttack(context); //Attack with fireballs
     }
 
-    /*
-        Line renderer: https://docs.unity3d.com/ScriptReference/LineRenderer.html
-
-        This function deals with rendering the beam that comes from the Boss' chest.
-        This is done by getting the line renderer component from the boss' weapon
-        and then setting the end of the beam to an arbitrary vector. From there
-        the start of the beam is the weapon (middle of chest) and end is that that arbitrary vector.
-        Then the vector btween the start and end are calculated and passed to the damage function.
-    */
+    ///<summary>
+    /// Line renderer: https://docs.unity3d.com/ScriptReference/LineRenderer.html
+    ///This function deals with rendering the beam that comes from the Boss' chest. and then setting the end of the beam to an arbitrary vector. From there
+    ///the start of the beam is the weapon (middle of chest) and end is that that arbitrary vector. 
+    ///Then the vector btween the start and end are calculated and passed to the damage function.
+    ///</summary>
     private void RenderBeam(){
 
         LineRenderer laserBeam = bossWeapons.weaponThree.GetComponent<LineRenderer>();
@@ -83,10 +76,14 @@ public class BossOneAttackState : BossAttackState
 
         Prameter: beamEnd, the direction of the raycast
     */
+
+    ///<summary>
+    /// Deals with dealing damage to the player if they enter the beam. Raycasts, if encounters the tag "player", do damage to it.
+    ///</summary>
+    ///<param name="beamEnd">Where the beam should end<param>
     private void BeamDamage(Vector3 beamEnd){
 
         RaycastHit hit;
-
         AudioManager.mngInstance.PlaySound("Beam", AudioManager.mngInstance.sounds); //Play sound
 
         //Checks if the beam hits anything
@@ -104,11 +101,10 @@ public class BossOneAttackState : BossAttackState
         }
     }
 
-    /*
-        Deals with rotating the boss while it beams the
-        player. After the boss has rotated enough it will
-        switch to the rest state.
-    */
+    ///<summary>
+    ///Deals with rotating the boss while it beams the player. After the boss has rotated enough it will switch to the rest state.
+    ///</summary>
+    ///<param name="context">Current state<param>
     private void RotateBoss(BossContext context){
         
         ResetRotation();
@@ -130,10 +126,9 @@ public class BossOneAttackState : BossAttackState
         }
     }
 
-    /*
-        Deals with resetting the boss' rotation angles
-        so that it parallel to the pillars. 
-    */
+    ///<summary>
+    ///Deals with resetting the boss' rotation angles so that it parallel to the pillars. 
+    ///</summary>
     private void ResetRotation(){
         if(resetRotation){
             itSelf.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -141,14 +136,10 @@ public class BossOneAttackState : BossAttackState
         }
     }
 
-    /*
-        Deals with shooting the fireball every x seconds
-        at the target (the player). THis is done by seeing 
-        if the current time is greater than the time to wait
-        for, if it is, then update the wait time to be greater again.
-        Check if the weapon exsits (cannon) and then call a function
-        from another class to deal with instatinating the fireball.
-    */
+    ///<summary>
+    ///Deals with shooting the fireball every x seconds at the target (the player). THis is done by seeing if the current time is greater than the time to wait
+    ///for, if it is, then update the wait time to be greater again. Check if the weapon exsits (cannon) and then call a function from another class to deal with instatinating the fireball.
+    ///</summary>
     private void FireBallAttack(BossContext context){
 
         FaceTarget();

@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+///<summary>
+///Deals with what the bosses do while they are in the idle state
+///</summary>
 public class BossIdleState : BossState
 {
     //Constructor Paramters: The ones under "Enemy Properties" above this method

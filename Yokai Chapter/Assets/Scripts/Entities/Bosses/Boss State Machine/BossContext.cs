@@ -62,16 +62,12 @@ public class BossContext : MonoBehaviour
         state.StartState(this);
     }
 
-    /*  
-        Deals with Instantiating an object from the boss' weapons.
-        This has to be done here because the child is not from
-        MonoBehaviour.
-
-        Parameters:
-        prefab, gameobject of what is going to be Instantiated;
-        origin, gameobject, holding infromation on where the object is going to be Instantiated
-        dmg, the number of damage the target will take
-    */
+    ///<summary>
+    ///Deals with Instantiating an object from the boss' weapons. This has to be done here because the child is not from MonoBehaviour.
+    ///<summary>
+    /// <param name="prefab">Object to instantiate </param>
+    /// <param name="origin">Where to instantiate from </param>
+    /// <param name="dmg">How much damage this object will do </param>
     public void InstantiateObject(GameObject prefab, GameObject origin, float dmg){
         if(dmg > 0)
             Instantiate(prefab, origin.transform.position, origin.transform.rotation).GetComponent<Fireball>().SetDmg(dmg);
@@ -103,7 +99,6 @@ public class BossContext : MonoBehaviour
     }
 
     public virtual void SwitchToWalk(){}
-
 }
 
 /// <summary>

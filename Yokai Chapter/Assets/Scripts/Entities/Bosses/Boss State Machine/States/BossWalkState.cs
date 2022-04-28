@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+///<summary>
+///Deals wth what the bosses do when they are in the walking state
+///</summary>
 public class BossWalkState : BossState
 {
     private NavMeshAgent agent;

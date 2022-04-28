@@ -1,5 +1,9 @@
 using UnityEngine;
 
+///<summary>
+///Parent to all states, keeps common info.
+///<summary>
+
 public abstract class BossState
 {   
     public BossTemplate bossTemplate; //Scriptable object containing enemy details

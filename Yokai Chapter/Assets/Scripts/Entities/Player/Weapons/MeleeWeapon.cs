@@ -41,9 +41,6 @@ public class MeleeWeapon : Weapon
     ///Deals with executing code when the object has collided with something with a collider.
     ///</summary>
     private void OnTriggerEnter(Collider other) {
-
-        Debug.Log(other.transform.name);
-
         if(isAttacking)
             FindShotType(other.transform); //Finds what enemy was hit and deals dmg to it     
     }
