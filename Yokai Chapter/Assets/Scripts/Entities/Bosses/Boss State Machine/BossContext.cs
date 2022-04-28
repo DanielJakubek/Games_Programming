@@ -88,7 +88,6 @@ public class BossContext : MonoBehaviour
         return bossTemplate.health;
     }
 
-    
     /// <summary>
     /// Used to get the distance between the target and this object
     /// </summary>
@@ -106,7 +105,10 @@ public class BossContext : MonoBehaviour
     public virtual void SwitchToWalk(){}
 
 }
-/* Struct holding gameobject of Boss's weapons */
+
+/// <summary>
+/// Struct holding gameobject of Boss's weapons
+/// </summary>
 [System.Serializable]
 public struct BossWeapons{
     public GameObject weaponOne;

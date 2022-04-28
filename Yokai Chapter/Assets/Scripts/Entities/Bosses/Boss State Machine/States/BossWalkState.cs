@@ -29,7 +29,6 @@ public class BossWalkState : BossState
 
     private Vector3 currnetLocation; //Used to see if player has moved positions
 
-
     /// <summary>
     /// Deals with moving the enemy towards the player and staying wihin a certain distance. 
     /// This is done by getting the distance between the two targets and if the distance is too great, 
@@ -42,7 +41,6 @@ public class BossWalkState : BossState
         //Distance between the enemy and target
         float distanceBetweenEntities = context.getDistanceBetween();
 
-   
         //Go to attacking state when in attack range
         if(distanceBetweenEntities <= bossTemplate.range){
 

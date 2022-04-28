@@ -11,6 +11,7 @@ public class NewEnemy : Entity
     public Transform target;
 
     private GameObject thePlayer;
+    private float oldHealth;
 
     //Called once before the start  
     private void Awake() {
@@ -19,28 +20,59 @@ public class NewEnemy : Entity
 
     //Called once at the start 
     private void Start() {
-        //AudioManager.mngInstance.PlaySound("OkubiAmbient", AudioManager.mngInstance.sounds);
 
         //Player game object to follow/target
         thePlayer = Player.playerInstance.gameObject;
         target = thePlayer.transform;
+        oldHealth = health;
     }
 
     //Called every frame before Update
     private void FixedUpdate() {
-        FaceTarget(target.position);   
+        LookAt();  
     }
 
+    //Called every frame frame
+    private void Update() {
+        DamageIndicator();  
+    }
 
-    /*  
-        It rotates the enemy to face the target (locking the y rotation). 
-        Parameter: playerPosition, vector3 that sends the information  where to rotate towards
-    */
-    public void FaceTarget(Vector3 lookPosition){
+    ///<summary>
+    ///Deals with playing the damage taken animation
+    ///</summary>
+    private void DamageIndicator(){
 
-        //Rotates the enemy to face the player/object it is tracking
-        Vector3 rotationLocation = new Vector3(lookPosition.x, 0f, lookPosition.z);
-        transform.LookAt(rotationLocation);
+        /*If the health has changed then get this game objects animatior and play tranisition 3, which is the taken dmg aniamtion */
+        if(health != oldHealth){
+            
+            var tempAnimator = gameObject.GetComponent<Animator> ();
+
+            if(tempAnimator !=null){
+                
+                var tempInt = tempAnimator.GetInteger("Transition");
+                tempAnimator.SetInteger("Transition", 3);
+                tempAnimator.SetInteger("Transition", tempInt);
+            }
+            oldHealth = health;
+        }
+    }
+
+    ///<summary>
+    ///Improved on FaceTarget function as started using Rigidbodies. Makes entity face their target
+    ///It rotates the enemy to face the target (locking the y rotation). 
+    ///</summary>
+    public void LookAt(){
+
+        //Vector 3 between the target and this entity
+        Vector3 lookAt = target.transform.position - transform.position;
+        lookAt = new Vector3(lookAt.x, 0f, lookAt.z);
+        
+        //Where to rotate
+        Quaternion rotate = Quaternion.LookRotation(lookAt);
+        
+        var temp = gameObject.GetComponent<Rigidbody>();
+        if(temp !=null)
+            temp.transform.rotation = rotate;
     }
 
     private void voidPlayOkubiSound(){

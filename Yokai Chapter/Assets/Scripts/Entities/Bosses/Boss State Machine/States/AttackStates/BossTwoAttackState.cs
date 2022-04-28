@@ -49,6 +49,9 @@ public class BossTwoAttackState : BossAttackState
             Attack();
     }
 
+    ///<summary>
+    ///Creates a good around the map which slows the player down
+    ///</summary>
     private void GooTarget(BossContext context){
         float distanceBetweenEntities = context.getDistanceBetween();
         if(goo != null && !gooed){

@@ -32,6 +32,7 @@ public class AreaManager : MonoBehaviour
                     triggered = false;
 
                     if(closeDoors){
+                        Debug.Log(closeDoors);
                         try{
                             EventManager.eventMngr.CloseAllDoors();
                         }catch(Exception e){ Debug.Log(e); }
@@ -51,6 +52,7 @@ public class AreaManager : MonoBehaviour
             if(!triggerOnce){
 
                 if(closeDoors){
+                    Debug.Log(closeDoors);
                     try{
                         EventManager.eventMngr.CloseAllDoors();
                     }catch(Exception e){ Debug.Log(e); }

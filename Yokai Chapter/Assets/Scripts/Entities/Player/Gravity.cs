@@ -20,18 +20,25 @@ public class Gravity : MonoBehaviour
     private Vector3 gravityStore; // Used to store the gravity vectors.
     private CharacterController chrController; // The character controller
 
-    //Called once before the start
+    
+    ///<summary>
+    ///Called once before the start
+    ///</summary>
     private void Awake() {
         //Gets and sets t character controller
         chrController = GetComponent<CharacterController>();
     }
 
-    //Called once before update - used for physical items
+    ///<summary>
+    ///Called once before update - used for physical items
+    ///</summary>
     private void FixedUpdate() {
         gravityPhysics();
     }
 
-    /* Deals with the gravity of the player - Basically allows the player to fall. */
+    ///<summary>
+    ///Deals with the gravity of the player - Basically allows the player to fall
+    ///</summary>
     private void gravityPhysics(){
 
         //Creates a sphere around the object and checks if it collides with anything, if so then changes the grounded bool
@@ -51,22 +58,19 @@ public class Gravity : MonoBehaviour
         chrController.Move(gravityStore * Time.deltaTime);
     }
 
-    /* 
-        Deals with the player jumping. When the jump key is pressed and player is grounded (not in air), 
-        the jump speed (going up speed) is calculated using the physics equation: v^(2) = u^(2)+ 2as
-    */
+    ///<summary>
+    ///Deals with the player jumping. When the jump key is pressed and player is grounded (not in air), 
+    ///the jump speed (going up speed) is calculated using the physics equation: v^(2) = u^(2)+ 2as
+    ///</summary>
     public void playerJump(){
         if(Input.GetButtonDown("Jump") && grounded){
             gravityStore.y = Mathf.Sqrt(height * -2f * gravity); 
         }   
     }
-
-    /* Getter for the number of jumps */
-    public int getJumpCounter(){
-        return jumpCounter;
-    }
-
-    /* Getter for the bool grounded - to check if player is in the air or not */
+    
+    ///<summary>
+    ///Getter for the bool grounded - to check if player is in the air or not
+    ///</summary>
     public bool getGrounded(){
        return grounded;
     }

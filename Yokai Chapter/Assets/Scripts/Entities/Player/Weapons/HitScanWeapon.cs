@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HitScanWeapon : Weapon
 {
 
     public ParticleSystem muzzleFlash; 
-    public GameObject hitParticle; 
-
 
     //Update is called once per frame
     private void Update(){
@@ -51,7 +47,7 @@ public class HitScanWeapon : Weapon
     /*
         Particles that appear when then enemy dies
     */
-    public override void ImpactParticleInstantiate(bool hitEnemy){
+    public override void ImpactParticleInstantiate(bool hitEnemy, GameObject targetHit){
 
         GameObject temp;
 

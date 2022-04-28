@@ -21,6 +21,9 @@ public class Door : Interact
 
     /* Closes the door and makes it so it cannot be opened */
     public void CloseDoor(){
+        
+        Debug.Log("I am getting called");
+
         canOpen = !canOpen;
         
         if(isOpen)

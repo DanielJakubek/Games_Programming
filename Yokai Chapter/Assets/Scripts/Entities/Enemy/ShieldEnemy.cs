@@ -29,25 +29,6 @@ public class ShieldEnemy : NewEnemy
         FireHealthBeam();
     }
 
- 
-    ///<summary>
-    ///Improved on FaceTarget function as started using Rigidbodies. Makes entity face their target
-    ///</summary>
-    public void LookAt(){
-
-        //Vector 3 between the target and this entity
-        Vector3 lookAt = target.transform.position - transform.position;
-        lookAt = new Vector3(lookAt.x, 0f, lookAt.z);
-        
-        //Where to rotate
-        Quaternion rotate = Quaternion.LookRotation(lookAt);
-        
-        var temp = gameObject.GetComponent<Rigidbody>();
-        if(temp !=null)
-            temp.transform.rotation = rotate;
-    }
-
-
     ///<summary>
     ///Keeps track of enemy properties such as their health. Enemy only has one state
     ///Therefore decided to keep it in here

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/*
-    This class is all about the player's movement.
-*/
+///<summary>
+///Deals with the player's movement
+///</summary>
 public class CharacterMovement : MonoBehaviour{
 
     [Header("Player movement")]
@@ -28,7 +28,6 @@ public class CharacterMovement : MonoBehaviour{
     private float waitTime; //How long it has been between steps
     
     public Camera playerCam; //Stores the player camera
-    
     private Gravity gravityTemp; //Gravity class
 
     // Start is called at the start of the program.
@@ -40,24 +39,28 @@ public class CharacterMovement : MonoBehaviour{
         startingPosition = playerCam.transform.localPosition.y;
     }
 
+    //Called once before the first frame
     private void Start() {
         audioMng = AudioManager.mngInstance;
         EventManager.eventMngr.speedDebuff += MovementDecrease;
         EventManager.eventMngr.speedIncrease += MovementIncrease;
     }
 
-
     //Called every frame before update, mostly used for physics
     private void FixedUpdate() {
         MoveCharacter(); // Allows for movement.
     }
 
+    //Called every frame
     private void Update() {
         gravityTemp.playerJump(); //Calls the jump function from the gravity class
     }
 
 
-    /* Function deals with the character horizontal movement */
+    
+    ///<summary>
+    ///Function deals with the character horizontal movement
+    ///</summary> 
     private void MoveCharacter(){
 
         //Gets user input and changes the vector 3 variable accordingly.
@@ -80,11 +83,10 @@ public class CharacterMovement : MonoBehaviour{
         }   
     }
 
-    /*
-        Deals with the headbobbing movement (Up and down) when the character is walking.
-
-        Parameters: Bool grounded, if the player is in the air or not
-    */
+    ///<summary>
+    ///Deals with the headbobbing movement (Up and down) when the character is walking.
+    ///</summary> 
+    ///<param name="grounded"> if the player is on the ground/not in the air</param>
     public void DoHeadbob(bool grounded){
 
         if(grounded){
@@ -104,9 +106,9 @@ public class CharacterMovement : MonoBehaviour{
         }
     }
 
-    /*
-        Deals with playing the foot step sounds every few miliseconds
-    */
+    ///<summary>
+    ///Deals with playing the foot step sounds every few miliseconds
+    ///</summary>
     private void HandleFootSteps(){
         
          //Gets the user input
@@ -125,12 +127,14 @@ public class CharacterMovement : MonoBehaviour{
     ///</summary>
     public void MovementDecrease(float debuff){
 
+        //Saves the current default speed values
         if(!savedVelocities){
             oldWalkVelocity = walkVelocity;
             oldRunningVelocity = sprintVelocity;
             savedVelocities= true;
         }
 
+        /* If there is a debuff, apply it to the player's movement */
         if(debuff <= 1 || debuff > 0 && savedVelocities){
             walkVelocity *= debuff; // Walking speed
             sprintVelocity *= debuff; // Sprinting speed
@@ -139,7 +143,7 @@ public class CharacterMovement : MonoBehaviour{
 
     private float oldWalkVelocity;
     private float oldRunningVelocity;
-    bool savedVelocities = false;
+    private bool savedVelocities = false;
 
     ///<summary>
     ///Changes the speed of the player

@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour
     public Animator weaponAnimator; //The animator
     public GameObject impactParticle; //The particle system for the muzzle flash
     public Camera playerCamera; //The player's camera
+    public GameObject hitParticle; 
 
     private void Awake() {
         audioMng = AudioManager.mngInstance;
@@ -58,7 +59,6 @@ public class Weapon : MonoBehaviour
     /* Handles weapon operation */
     public virtual void HandleWeapon(){}
 
-
     /*
         Deals with finding out what target was hit
         and then doing the approprate action
@@ -73,9 +73,7 @@ public class Weapon : MonoBehaviour
                 if(enemy != null)
                     enemy.UpdateHealth(weaponTemplate.dmg);
                 
-                ImpactParticleInstantiate(true);
-
-                Debug.Log("Enemy hit");
+                ImpactParticleInstantiate(true, targetHit.gameObject);
             break;
 
             case "Boss":
@@ -83,7 +81,7 @@ public class Weapon : MonoBehaviour
                     if(boss != null)
                         boss.UpdateHealth(weaponTemplate.dmg);
 
-                Debug.Log("Boss hit");
+                ImpactParticleInstantiate(true, targetHit.gameObject);
             break;
 
             case "Explode":
@@ -91,14 +89,14 @@ public class Weapon : MonoBehaviour
                     if(explode != null)
                         explode.UpdateHealth(weaponTemplate.dmg);
 
-                Debug.Log("Explode hit");
+                ImpactParticleInstantiate(true, targetHit.gameObject);
             break;
 
             default:
-                ImpactParticleInstantiate(false);
+                ImpactParticleInstantiate(false, targetHit.gameObject);
             break;
         }
     }
 
-    public virtual void ImpactParticleInstantiate(bool hitEnemy){}
+    public virtual void ImpactParticleInstantiate(bool hitEnemy, GameObject enemyHit){}
 }
