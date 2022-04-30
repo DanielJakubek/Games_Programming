@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/*
-    Deals with player and door interaction
-*/
+///<summary>
+///Deals with player and door interaction
+///</summary>
 public class Door : Interact
 {   
     private bool isOpen; //Is door open
@@ -19,11 +17,10 @@ public class Door : Interact
         EventManager.eventMngr.closeDoors += CloseDoor; //Subs function to event
     }
 
-    /* Closes the door and makes it so it cannot be opened */
+    ///<summary>
+    ///Closes the door and makes it so it cannot be opened 
+    ///</summar
     public void CloseDoor(){
-        
-        Debug.Log("I am getting called");
-
         canOpen = !canOpen;
         
         if(isOpen)

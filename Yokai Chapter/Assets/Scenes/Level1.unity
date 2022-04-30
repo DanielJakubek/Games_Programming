@@ -12304,6 +12304,10 @@ PrefabInstance:
       propertyPath: audioMng
       value: 
       objectReference: {fileID: 636602386498752928}
+    - target: {fileID: 1180007689330802324, guid: fe110960095267e4f85582e442a93b3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1180007689706026165, guid: fe110960095267e4f85582e442a93b3b, type: 3}
       propertyPath: audioMng
       value: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LootLockerConfig
   m_EditorClassIdentifier: 
   apiKey: 444a77864f5eae5a14ef7a0e952420b7e08775c6
-  token: 4df34b9779fadc57f8deb4d1cece944b1725a93c
+  token: 7a32e87738f8616b6d0730a783875cd6b9be3ace
   adminToken: 
   domainKey: https://zmwnn8eo.api.lootlocker.io/
   gameID: 0
@@ -26,5 +26,5 @@ MonoBehaviour:
   playerUrl: https://api.lootlocker.io/player
   userUrl: https://api.lootlocker.io/game
   baseUrl: https://api.lootlocker.io
-  currentDebugLevel: 0
+  currentDebugLevel: 3
   allowTokenRefresh: 1

@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using LootLocker.Requests;
 
+///<summary>
+/// Class that deals with what the player sees after the beat the level
+///</summary>
 public class CompleteMenu : MenuParent
 {
     [Header("Buttons")]
@@ -101,10 +102,8 @@ public class CompleteMenu : MenuParent
     ///</summary>
     public void StartLootLockerSession(){
         LootLockerSDKManager.StartGuestSession("Player", (response) => {
-            if(response.success)
-                Debug.Log("Connected to LootLocker");
-            else
-                Debug.Log("Did not connect to LootLocker");
+            if(!response.success)
+                Debug.LogError("Could not Connect to online services"); 
         });
     }
 
@@ -116,10 +115,8 @@ public class CompleteMenu : MenuParent
         int playerTimeInt = (int)finalTime; 
 
         LootLockerSDKManager.SubmitScore(playerName.text, playerTimeInt, boardID, (response) =>{
-            if(response.success)
-                Debug.Log("Connected to LootLocker");
-            else
-                Debug.Log("Did not connect to LootLocker");
+            if(!response.success)
+                Debug.LogError("Could not Connect to online services");    
         });
         DisplayLeaderBoard();
     }
@@ -147,6 +144,9 @@ public class CompleteMenu : MenuParent
                         leaderBoardTime.text += item.score.ToString() + "\n";
                     }
                 }
+            }
+            else{
+                Debug.LogError("Could not Connect to online services");
             }
         });
     }

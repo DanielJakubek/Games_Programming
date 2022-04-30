@@ -3,11 +3,10 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-
-/* 
-    References Barckeys video on "Introduction to AUDIO in Unity".
-    https://www.youtube.com/watch?v=6OT43pvUyfY
-*/
+///<summary>
+/// The audio manager deals with playing audio, stopping audio and loading audio.
+///References Barckeys video on "Introduction to AUDIO in Unity". https://www.youtube.com/watch?v=6OT43pvUyfY
+///</summary
 public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds; //Ref to Sounds class (main sounds)
@@ -26,7 +25,7 @@ public class AudioManager : MonoBehaviour
         AddAudioSources(sounds);  
     }
 
-    //Plays once at the start
+    //Plays once at the start before the first frame
     private void Start(){
         oldVolume = PlayerPrefs.GetFloat("Volume");
 
@@ -34,12 +33,17 @@ public class AudioManager : MonoBehaviour
             PlaySound("MusicMenu", sounds);
     }
     
+    //Called once every frame
     private void Update() {
         if(oldVolume != PlayerPrefs.GetFloat("Volume"))
             UpdateVolume(sounds); 
     }
 
-    //Initalises all the sources
+    
+    ///<summary>
+    /////Initalises all the sources
+    ///</summary>
+    ///<param name="itArray"> The array holding all the sounds </param>
     private void AddAudioSources(Sounds[] itArray){
 
         //Adds each audio source in our array, including its volume properties
@@ -53,14 +57,18 @@ public class AudioManager : MonoBehaviour
     }
 
     
-    /* Finds the sound we want in the sounds array and then plays it. */
+    ///<summary>
+    ///Finds the sound we want in the sounds array and then plays it.
+    ///</summary>
+    ///<param name="soundName"> Name of the sound to look for </param>
+    ///<param name="soundArray"> The array holding all the sounds </param>
     public void PlaySound(string soundName, Sounds[] soundArray){
 
         if(soundName !=null && soundArray !=null){
             Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
               
             //Checks if the sounds exsits, if so then play the sound otherwise have a console message
-            if(foundSound != null)
+            if(foundSound != null && foundSound.source !=null)
                 foundSound.source.Play();
             else{
                 Debug.Log("The sound: " +  soundName + " was not found");
@@ -69,14 +77,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    /* Finds the sound we want in the sounds array and then stops it. */
+    ///<summary>
+    ///Finds the sound we want in the sounds array and then stops it
+    ///</summary>
+    ///<param name="soundName"> Name of the sound to look for </param>
+    ///<param name="soundArray"> The array holding all the sounds </param>  
     public void StopSound(string soundName, Sounds[] soundArray){
 
         if(soundName !=null && soundArray !=null){
             Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);
             
             //Checks if the sounds exsits, if so then play the sound otherwise have a console message
-            if(foundSound != null)
+            if(foundSound != null && foundSound.source !=null)
                 foundSound.source.Stop();
             else{
                 Debug.Log("The sound: " +  soundName + " was not found");
@@ -90,6 +102,7 @@ public class AudioManager : MonoBehaviour
     ///the player pref and then times the start volume of each volume by that
     /// pref number and then nets the old volume to the new volume
     ///</summary>
+    ///<param name="itArray"> The array holding all the sounds </param>  
     private void UpdateVolume(Sounds[] itArray){
 
         float newVolume = PlayerPrefs.GetFloat("Volume");
@@ -105,6 +118,8 @@ public class AudioManager : MonoBehaviour
     ///<summary>
     ///Decreases the volume by one every second
     ///</summary>
+    ///<param name="soundName"> Name of the sound to look for </param>
+    ///<param name="soundArray"> The array holding all the sounds </param>  
     public IEnumerator DecreaseVolume(string soundName, Sounds[] soundArray){
         if(soundName !=null && soundArray !=null){
             Sounds foundSound = Array.Find(soundArray, sound => sound.name == soundName);

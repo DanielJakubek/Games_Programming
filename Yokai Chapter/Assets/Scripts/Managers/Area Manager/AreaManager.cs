@@ -1,12 +1,10 @@
 using UnityEngine;
 using System;
 
-/*
-    Purpose of this class is to spawn an enemy
-    wave when the trigger area has been entered. After
-    trigger area has been activated it will spawn enemies after
-    all enemies die per wave
-*/
+///<summary>
+///Purpose of this class is to spawn an enemy wave when the trigger area has been entered. After
+///trigger area has been activated it will spawn enemies after all enemies die per wave
+///</summary>
 public class AreaManager : MonoBehaviour
 {
     public int numberOfWaves,currentWave; //Number of waves and tracker of currnet wave
@@ -32,7 +30,6 @@ public class AreaManager : MonoBehaviour
                     triggered = false;
 
                     if(closeDoors){
-                        Debug.Log(closeDoors);
                         try{
                             EventManager.eventMngr.CloseAllDoors();
                         }catch(Exception e){ Debug.Log(e); }
@@ -52,7 +49,6 @@ public class AreaManager : MonoBehaviour
             if(!triggerOnce){
 
                 if(closeDoors){
-                    Debug.Log(closeDoors);
                     try{
                         EventManager.eventMngr.CloseAllDoors();
                     }catch(Exception e){ Debug.Log(e); }
