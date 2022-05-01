@@ -19,7 +19,7 @@ public class Door : Interact
 
     ///<summary>
     ///Closes the door and makes it so it cannot be opened 
-    ///</summar
+    ///</summar>
     public void CloseDoor(){
         canOpen = !canOpen;
         
